@@ -40,7 +40,7 @@ export default function Navbar(): JSX.Element {
   const handleLogOut = async () => {
     await dispatch(LOGOUTUSER());
     await toast.success("Come back soon!");
-    setTimeout(() => (window.location.href = "http://localhost:3000/"), 1000);
+    setTimeout(() => (window.location.href = "https://coolormedia.netlify.app/"), 1000);
   };
 
   useEffect(() => {

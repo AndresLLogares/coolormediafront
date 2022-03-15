@@ -1,6 +1,6 @@
 import axios from "axios";
 import setToken from "../utils/setToken";
-import URL from "../utils/url";  
+import {URL} from "../utils/url";  
 export const SET_CURRENT_USER = "SETCURRENTUSER";
 export const GET_NEWS = "GETNEWS";
 export const GET_USER = "GETUSER";

@@ -1,5 +1,6 @@
 import axios from "axios";
 import setToken from "../utils/setToken";
+import URL from "../utils/url";  
 export const SET_CURRENT_USER = "SETCURRENTUSER";
 export const GET_NEWS = "GETNEWS";
 export const GET_USER = "GETUSER";
@@ -12,8 +13,6 @@ export const GET_USER_UUID = "GETUSERUUID";
 export const GET_FRIENDS = "GETFRIENDS";
 export const GET_POST_BYUUID = "GETPOSTBYUUID";
 export const GET_FRIENDS_BYUUID = "GETFRIENDSBYUUID";
-
-let URL = "http://localhost:8080/";
 
 export const GETFRIENDSUUID = (info:string) => {
     return async (dispatch: (arg0: { type: string; payload: any; }) => void) => {

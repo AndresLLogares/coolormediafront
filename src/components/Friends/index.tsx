@@ -115,7 +115,7 @@ export default function Friends(props: any): JSX.Element {
                                   target="_blank"
                                   className={classes.eachLink}
                                   rel="noreferrer"
-                                  href={`http://localhost:3000/profileOut?uuid=${item.frieduuid}`}
+                                  href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frieduuid}`}
                                 >
                                   <p className={classes.textName}>
                                     {item.namefriend}
@@ -181,7 +181,7 @@ export default function Friends(props: any): JSX.Element {
                                   target="_blank"
                                   className={classes.eachLink}
                                   rel="noreferrer"
-                                  href={`http://localhost:3000/profileOut?uuid=${item.frieduuid}`}
+                                  href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frieduuid}`}
                                 >
                                   <p className={classes.textName}>
                                     {item.namefriend}

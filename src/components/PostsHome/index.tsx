@@ -71,7 +71,7 @@ export default function PostsHome(props: any): JSX.Element {
                 target="_blank"
                 className={classes.eachLink}
                 rel="noreferrer"
-                href={`http://localhost:3000/profileOut?uuid=${post.useruuid}`}
+                href={`https://coolormedia.netlify.app/profileOut?uuid=${post.useruuid}`}
               >
                 <p className={classes.name}>{post.name}</p>
               </a>

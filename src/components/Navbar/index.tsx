@@ -95,7 +95,7 @@ export default function Navbar(): JSX.Element {
                     style={{ textDecoration: "none" }}
                     target="_blank"
                     rel="noreferrer"
-                    href={`http://localhost:3000/profileOut?uuid=${item.uuid}`}
+                    href={`https://coolormedia.netlify.app/profileOut?uuid=${item.uuid}`}
                   >
                     <p className={classes.auto}>{item.full_name}</p>
                   </a>

@@ -1,0 +1,70 @@
+$Purple: #9b5de5;
+$Pink: #f15bb5;
+$Yellow: #fee440;
+$Blue: #00bbf9;
+$Turquoise: #00f5d4;
+$White: #ffffff;
+$Black: #231b1b;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: fit-content;
+  background-color: #ffffff;
+  justify-items: center;
+  align-items: center;
+  background-image: url(./assets/Background.png);
+  background-repeat: repeat;
+  background-position: center top;
+  background-size:1200px 1200px;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: $White;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 3rem;
+  height: 3rem;
+  border: 0.2rem solid $Black;
+  border-radius: 5px;
+  transform: translateY(-0.075em);
+  margin-top: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em 0 rgba(0, 0, 0, 0.2);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
+input[type="checkbox"]:disabled {
+  --form-control-color: var(--form-control-disabled);
+
+  color: var(--form-control-disabled);
+  cursor: not-allowed;
+}

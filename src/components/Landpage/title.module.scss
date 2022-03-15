@@ -1,0 +1,27 @@
+$Purple: #9b5de5;
+$Pink: #f15bb5;
+$Yellow: #fee440;
+$Blue: #00bbf9;
+$Turquoise: #00f5d4;
+$White: #ffffff;
+$Black: #231b1b;
+
+@font-face {
+  font-family: "Badabb";
+  src: url(../../assets/fonts/Lemon.ttf);
+}
+
+.title {
+  font-family: "Badabb", sans-serif;
+  font-size: 20vh;
+  color: $White;
+  font-weight: 500;
+  text-shadow: $Black 2px 2px 0px, $Black 4px 4px 0px;
+  margin: 0;
+}
+
+@media screen and (max-width: 1280px) {
+  .title {
+    font-size: 8vh;
+  }
+}

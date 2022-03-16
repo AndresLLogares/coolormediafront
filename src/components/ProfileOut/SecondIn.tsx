@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "80%",
+    width: "60%",
     backgroundColor: `${colors.Purple}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
@@ -140,11 +140,10 @@ const useStyles = makeStyles({
   },
   divList: {
     display: "flex",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: "column",
     width: "100%",
     "@media (max-width: 1280px)": {
       width: "90%",
@@ -157,7 +156,7 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     textAlign: "start",
     flexDirection: "column",
-    width: "40%",
+    width: "60%",
     margin: "2rem",
     border: `0.2rem solid ${colors.Black}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
@@ -170,6 +169,7 @@ const useStyles = makeStyles({
       width: "90%",
     },
   },
+
 
   divButtonDelete: {
     display: "flex",

@@ -146,7 +146,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "80%",
+    width: "60%",
     borderRadius: "5px",
     transition: "5s",
     "@media (max-width: 1280px)": {
@@ -227,12 +227,12 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "80%",
+    width: "95%",
     backgroundColor: colors.Purple,
     border: `2px solid ${colors.Black}`,
     borderRadius: "5px",
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
-    padding: "2rem",
+    padding: "1rem",
     marginBottom: "2rem",
     "@media (max-width: 1280px)": {
       width: "100%",

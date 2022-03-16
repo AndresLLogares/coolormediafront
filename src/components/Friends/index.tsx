@@ -26,10 +26,10 @@ export default function Friends(props: any): JSX.Element {
   let currentUser = user?.coolor?.user || {};
 
   let booleanFriends =
-    friends && friends.find((item: any) => item.request === false);
+    friends && friends.filter((item: any) => item.request === false);
 
   let booleanRequest =
-    friends && friends.find((item: any) => item.request === true);
+    friends && friends.filter((item: any) => item.request === true);
 
   useEffect(() => {
     const getUser = async () => {
@@ -93,8 +93,8 @@ export default function Friends(props: any): JSX.Element {
               </div>
               {booleanRequest && booleanRequest.length !== 0 ? (
                 <div className={classes.divFriends}>
-                  {friends &&
-                    friends.map((item: any, index: number) => {
+                  {booleanRequest &&
+                    booleanRequest.map((item: any, index: number) => {
                       return (
                         <div className={classes.divFriend} key={index}>
                           {item.request ? (
@@ -115,7 +115,7 @@ export default function Friends(props: any): JSX.Element {
                                   target="_blank"
                                   className={classes.eachLink}
                                   rel="noreferrer"
-                                  href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frieduuid}`}
+                                  href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frienduuid}`}
                                 >
                                   <p className={classes.textName}>
                                     {item.namefriend}
@@ -125,7 +125,7 @@ export default function Friends(props: any): JSX.Element {
                                   {item.emailfriend}
                                 </p>
                               </div>
-                              <div className={classes.divFriendName}>
+                              <div className={classes.divButtons}>
                                 <button
                                   className={classes.buttons}
                                   onClick={() => handleAcceptFriend(item.uuid)}
@@ -159,8 +159,8 @@ export default function Friends(props: any): JSX.Element {
               </div>
               {booleanFriends && booleanFriends.length !== 0 ? (
                 <div className={classes.divFriends}>
-                  {friends &&
-                    friends.map((item: any, index: number) => {
+                  {booleanFriends &&
+                    booleanFriends.map((item: any, index: number) => {
                       return (
                         <div className={classes.divFriend} key={index}>
                           {!item.request ? (
@@ -247,13 +247,19 @@ const useStyles = makeStyles({
     flexDirection: "column",
     marginTop: "5rem",
     marginBottom: "5rem",
-    width: "80%",
+    width: "60%",
     backgroundColor: `${colors.Purple}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     transition: "5s",
     "@media (max-width: 1280px)": {
-      width: "90%",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divTitle: {
@@ -297,6 +303,7 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     textAlign: "center",
     flexDirection: "column",
+    marginTop: "2rem",
     marginBottom: "2rem",
     width: "80%",
     "@media (max-width: 1280px)": {
@@ -329,8 +336,10 @@ const useStyles = makeStyles({
     width: "10rem",
     height: "10rem",
     backgroundColor: colors.Yellow,
-    boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
+    border: `.2rem solid ${colors.Black}`,
     borderRadius: "5px",
+    marginTop: "1rem",
+    marginBottom: "1rem",
   },
   profilePhoto: {
     display: "flex",
@@ -348,8 +357,7 @@ const useStyles = makeStyles({
     fontFamily: ["Trispace", "sans-serif"].join(","),
     fontSize: "3vh",
     fontWeight: 900,
-    marginBottom: "1rem",
-    marginTop: "1rem",
+    margin: '0',
     color: colors.Black,
   },
   textName: {
@@ -359,8 +367,8 @@ const useStyles = makeStyles({
     fontFamily: ["Trispace", "sans-serif"].join(","),
     fontSize: "3vh",
     fontWeight: 900,
-    marginBottom: "1rem",
-    marginTop: "1rem",
+    margin: '0',
+    marginBottom: "2rem",
     color: colors.Black,
     transitionDuration: "1s",
     "&:hover": {
@@ -383,6 +391,26 @@ const useStyles = makeStyles({
     "@media (max-width: 1280px)": {
       alignItems: "center",
       justifyContent: "center",
+      marginTop: "2rem",
+      marginBottom: "2rem",
+      marginLeft: "0",
+      width: "100%",
+    },
+  },
+  divButtons: {
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    textAlign: "center",
+    flexDirection: "column",
+    width: "30%",
+    marginLeft: "5rem",
+    height: "fit-content",
+    "@media (max-width: 1280px)": {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: "2rem",
       marginLeft: "0",
       width: "100%",
     },

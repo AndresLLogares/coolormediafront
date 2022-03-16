@@ -11,7 +11,7 @@ import { TextDocument } from "@styled-icons/entypo/TextDocument";
 
 export default function AboutMe(props: any): JSX.Element {
   const classes = useStyles();
-
+  
   return (
     <Layout>
       <div className={classes.root}>
@@ -108,21 +108,27 @@ const useStyles = makeStyles({
     width: "100%",
     height: "fit-content",
     marginTop: "5rem",
-    marginBottom: "2rem",
+    marginBottom: "5rem",
   },
   box: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    width: "70%",
+    width: "60%",
     height: "fit-content",
     backgroundColor: `${colors.Purple}`,
     borderRadius: `255px 15px 225px 15px/15px 225px 15px 255px`,
     border: `0.2rem solid ${colors.Black}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     "@media (max-width: 1280px)": {
-      width: "95%",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   sortTitle: {

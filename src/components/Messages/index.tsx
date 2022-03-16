@@ -35,6 +35,9 @@ export default function Friends(props: any): JSX.Element {
 
   const classes = useStyles();
 
+  let booleanFriends =
+    friends && friends.filter((item: any) => item.request === false);
+
   useEffect(() => {
     const getUser = async () => {
       await dispatch(GETUSER(emailUser));
@@ -75,7 +78,7 @@ export default function Friends(props: any): JSX.Element {
       <div className={classes.root}>
         <Title title={"Messages"} />
         <div className={classes.boxFriends}>
-          {friends.length === 0 ? (
+          {booleanFriends.length === 0 ? (
             <div className={classes.divTitle}>
               <p className={styles.miniTitle}>
                 You don't have any friends {currentUser.fullname}
@@ -89,8 +92,8 @@ export default function Friends(props: any): JSX.Element {
                 </p>
               </div>
               <div className={classes.divFriends}>
-                {friends &&
-                  friends.map((item: any, index: number) => {
+                {booleanFriends &&
+                  booleanFriends.map((item: any, index: number) => {
                     return (
                       <button
                         onClick={() =>
@@ -104,24 +107,11 @@ export default function Friends(props: any): JSX.Element {
                         key={index}
                       >
                         {!item.request ? (
-                          <Fragment>
-                            <div className={classes.divFriendPhoto}>
-                              {item.image ? (
-                                <img
-                                  src={item.image}
-                                  alt=""
-                                  className={classes.profilePhoto}
-                                />
-                              ) : (
-                                <p className={classes.textNone}>No photo</p>
-                              )}
-                            </div>
-                            <div className={classes.divFriendName}>
-                              <p className={classes.textNone}>
-                                {item.namefriend}
-                              </p>
-                            </div>
-                          </Fragment>
+                          <div className={classes.divFriendName}>
+                            <p className={classes.textNone}>
+                              {item.namefriend}
+                            </p>
+                          </div>
                         ) : (
                           <p className={classes.textNone}>No Friends</p>
                         )}
@@ -216,7 +206,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     flexDirection: "column",
     marginTop: "5rem",
-    width: "80%",
+    width: "60%",
     height: "25rem",
     overflowY: "scroll",
     backgroundColor: `${colors.Purple}`,
@@ -224,8 +214,13 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     transition: "5s",
     "@media (max-width: 1280px)": {
-      width: "90%",
-      height: "30rem",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   boxMessages: {
@@ -236,16 +231,20 @@ const useStyles = makeStyles({
     flexDirection: "column",
     marginTop: "5rem",
     marginBottom: "5rem",
-    width: "80%",
+    width: "60%",
     height: "fit-content",
     backgroundColor: `${colors.Purple}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     transitionDuration: "5s",
     "@media (max-width: 1280px)": {
-      width: "90%",
-      alignItems: "center",
-
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divTitle: {
@@ -306,7 +305,7 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     textAlign: "center",
     flexDirection: "row",
-    width: "40%",
+    width: "45%",
     height: "fit-content",
     padding: "1rem",
     backgroundColor: `${colors.Blue}`,
@@ -367,9 +366,9 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     textAlign: "center",
     flexDirection: "column",
-    width: "30%",
-    marginLeft: "5rem",
+    width: "35%",
     height: "fit-content",
+    marginLeft: "5rem",
     "@media (max-width: 1280px)": {
       width: "100%",
       marginLeft: "0",
@@ -392,7 +391,7 @@ const useStyles = makeStyles({
     backgroundColor: colors.White,
     "@media (max-width: 1280px)": {
       width: "80%",
-      alignItems: "flex-start",
+      alignItems: "center",
       justifyContent: "flex-start",
     },
   },
@@ -458,6 +457,10 @@ const useStyles = makeStyles({
     flexDirection: "column",
     width: "100%",
     marginBottom: "1rem",
+    "@media (max-width: 1280px)": {
+      alignItems: "center",
+      justifyContent: "center",
+    },
   },
   textArea: {
     width: "100%",
@@ -471,7 +474,8 @@ const useStyles = makeStyles({
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     resize: "none",
     "@media (max-width: 1280px)": {
-      width: "80%",
+      padding: "0.5rem",
+      width: "90%",
     },
   },
   divButton: {

@@ -62,7 +62,7 @@ export default function FormEducation(props: any): JSX.Element {
     }
     await axios
       .post(URL + "addeducation", {
-        email: emailUser.toLocaleLowerCase(),
+        email: emailUser.toLowerCase(),
         id: id,
         institute: information.institute,
         degree: information.degree,

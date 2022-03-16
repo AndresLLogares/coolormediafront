@@ -76,9 +76,9 @@ const useStyles = makeStyles({
     flexDirection: "column",
     marginTop: "5rem",
     marginBottom: "5rem",
-    width: "70%",
+    width: "60%",
     "@media (max-width: 1280px)": {
-      width: "90%",
+      width: "100%",
     },
   },
   eachNew: {
@@ -92,6 +92,15 @@ const useStyles = makeStyles({
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     backgroundColor: colors.Purple,
+    "@media (max-width: 1280px)": {
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
+    },
   },
   divTitle: {
     display: "flex",
@@ -122,10 +131,10 @@ const useStyles = makeStyles({
     justifyContent: "center",
     width: "60%",
     height: "auto",
-    boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
+    border: `.2rem solid ${colors.Black}`,
     "@media (max-width: 1280px)": {
-      width: "85%",
+      width: "82%",
       height: "auto",
     },
   },
@@ -148,7 +157,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     marginTop: "1rem",
     marginBottom: "1rem",
-    padding: "1rem",
+    padding: "0.5rem",
     backgroundColor: colors.White,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
@@ -165,7 +174,7 @@ const useStyles = makeStyles({
     fontFamily: ["Trispace", "sans-serif"].join(","),
     fontSize: "3vh",
     fontWeight: 900,
-    color: colors.Black,
+    color: colors.Black,    
     "@media (max-width: 1280px)": {
       fontSize: "2.5vh",
     },

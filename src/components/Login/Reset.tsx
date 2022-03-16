@@ -18,7 +18,7 @@ export default function Reset(props: any): JSX.Element {
     event.preventDefault();
     await axios
       .post(URL + "reset", {
-        email: information.email.toLocaleLowerCase(),
+        email: information.email.toLowerCase(),
         newpassword: information.password,
       })
       .then(async (response) => {
@@ -38,7 +38,6 @@ export default function Reset(props: any): JSX.Element {
   const classes = useStyles();
 
   return (
-    <Layout>
       <div className={classes.root}>
         <Title title={"Reset"} />
         <div className={classes.boxReset}>
@@ -83,7 +82,6 @@ export default function Reset(props: any): JSX.Element {
           </form>
         </div>
       </div>
-    </Layout>
   );
 }
 
@@ -97,6 +95,7 @@ const useStyles = makeStyles({
     height: "fit-content",
     width: "100%",
     minHeight: "100vh",
+    marginBottom: "5rem",
   },
   boxReset: {
     display: "flex",

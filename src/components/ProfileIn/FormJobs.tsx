@@ -63,7 +63,7 @@ export default function FormJobs(props: any): JSX.Element {
     }
     await axios
       .post(URL + "addjobs", {
-        email: emailUser.toLocaleLowerCase(),
+        email: emailUser.toLowerCase(),
         id: id,
         companyname: information.companyName,
         jobposition: information.jobPosition,

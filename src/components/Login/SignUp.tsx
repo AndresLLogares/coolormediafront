@@ -48,7 +48,7 @@ export default function SignUp(props:any): JSX.Element {
     await axios
       .post(URL + "signup", {
         name: information.name,
-        email: information.email.toLocaleLowerCase(),
+        email: information.email.toLowerCase(),
         password: information.password,
         lastname: information.lastName,
         age: age,
@@ -170,7 +170,6 @@ export default function SignUp(props:any): JSX.Element {
             name="birthday"
             placeholder="Birthday"
             type="Date"
-            value={dateOfBirthday}
             className={classes.input}
             autoComplete="off"
             onChange={(e) => setDate(new Date(e.target.value))}
@@ -178,7 +177,7 @@ export default function SignUp(props:any): JSX.Element {
         </div>
         <div className={classes.divInput}>
           <label htmlFor="age" className={classes.label}>
-            Date of birthday
+            Birthday
           </label>
           <input
             name="dateOfBirthday"
@@ -231,9 +230,14 @@ const useStyles = makeStyles({
     borderRadius: "95% 4% 92% 5%/4% 95% 6% 95%",
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     transition: "background-color 1s ease",
-
     "@media (max-width: 1280px)": {
-      width: "90%",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divTitle: {

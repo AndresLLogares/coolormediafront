@@ -186,11 +186,11 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "80.5%",
+    width: "60%",
     height: "fit-content",
     marginBottom: "5rem",
     "@media (max-width: 1280px)": {
-      width: "90%",
+      width: "100%",
       height: "auto",
     },
   },
@@ -204,7 +204,7 @@ const useStyles = makeStyles({
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     "@media (max-width: 1280px)": {
-      width: "100%",
+      width: "90%",
       height: "auto",
     },
   },
@@ -225,6 +225,9 @@ const useStyles = makeStyles({
     fontSize: "5vh",
     fontWeight: 900,
     color: colors.Black,
+    "@media (max-width: 1280px)": {
+      fontSize: "3vh",
+    },
   },
   sortButton: {
     display: "flex",

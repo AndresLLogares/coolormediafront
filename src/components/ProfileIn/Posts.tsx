@@ -188,11 +188,11 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "80%",
+    width: "100%",
     borderRadius: "5px",
     transition: "5s",
     "@media (max-width: 1280px)": {
-      width: "90%",
+      width: "100%",
     },
   },
   divTitle: {
@@ -201,11 +201,14 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "100%",
+    width: "60%",
     backgroundColor: colors.Blue,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     paddingTop: "2rem",
     paddingBottom: "2rem",
+    "@media (max-width: 1280px)": {
+      width: "90%",
+    },
   },
   divSubtitle: {
     display: "flex",
@@ -213,18 +216,21 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "100%",
+    width: "60%",
     backgroundColor: colors.Blue,
     borderRadius: "5px",
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     marginTop: "2rem",
     marginBottom: "2rem",
+    "@media (max-width: 1280px)": {
+      width: "90%",
+    },
   },
   divButton: {
     display: "flex",
     alignItems: "center",
     justifyContent: "Flex-end",
-    width: "100%",
+    width: "60%",
     marginTop: "2rem",
     marginBottom: "2rem",
     marginRight: "2rem",
@@ -281,7 +287,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    width: "80%",
+    width: "60%",
     backgroundColor: colors.Purple,
     border: `2px solid ${colors.Black}`,
     borderRadius: "5px",
@@ -289,8 +295,14 @@ const useStyles = makeStyles({
     padding: "2rem",
     marginBottom: "2rem",
     "@media (max-width: 1280px)": {
-      padding: "1rem",
-      width: "90%",
+      padding: "0rem",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divAuthor: {
@@ -299,7 +311,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     textAlign: "left",
     flexDirection: "row",
-    width: "100%",
+    width: "90%",
   },
   name: {
     display: "flex",
@@ -332,14 +344,15 @@ const useStyles = makeStyles({
 
   imagePost: {
     width: "640px",
-    height: "360px",
+    height: "480px",
     objectFit: `fill`,
     objectPosition: `center`,
-    boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
+    border: `.2rem solid ${colors.Black}`,
+    backgroundColor: colors.White,
     borderRadius: "5px",
     "@media (max-width: 1280px)": {
-      width: "100%",
-      height: "auto",
+      width: "320px",
+      height: "240px",
     },
   },
   divDescription: {
@@ -358,7 +371,7 @@ const useStyles = makeStyles({
     marginTop: "2rem",
     "@media (max-width: 1280px)": {
       padding: "1rem",
-      width: "90%",
+      width: "80%",
     },
   },
   description: {

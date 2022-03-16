@@ -22,15 +22,25 @@ export default function Login(): JSX.Element {
     password: "",
   });
 
+  let emailUser = localStorage.getItem("Email") || "";
+
   const [emailPopUp, setEmailPopUp] = useState("");
 
   const [popUp, setPopUp] = useState(false);
 
   const handleReset = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (emailUser !== "") {
+      toast.error("You already are logged in");
+      setTimeout(
+        () =>
+          (window.location.href = "https://coolormedia.netlify.app/home"),
+        1000
+      );
+    }
     await axios
       .post(URL + "geneLink", {
-        email: emailPopUp.toLocaleLowerCase(),
+        email: emailPopUp.toLowerCase(),
       })
       .then(async (response) => {
         if (response.data.success === true) {
@@ -47,7 +57,7 @@ export default function Login(): JSX.Element {
     event.preventDefault();
     await axios
       .post(URL + "login", {
-        email: information.email.toLocaleLowerCase(),
+        email: information.email.toLowerCase(),
         password: information.password,
       })
       .then(async (response) => {
@@ -63,7 +73,8 @@ export default function Login(): JSX.Element {
           const decoded = jwt_decode(token);
           dispatch(SETCURRENTUSER(decoded));
           setTimeout(
-            () => (window.location.href = "https://coolormedia.netlify.app/home"),
+            () =>
+              (window.location.href = "https://coolormedia.netlify.app/home"),
             1000
           );
         }
@@ -78,7 +89,7 @@ export default function Login(): JSX.Element {
     <div className={classes.root}>
       {popUp ? (
         <GlobalPopUp
-          top="30%"
+          top="10%"
           left="25%"
           width="50%"
           height="fit-content"
@@ -199,7 +210,13 @@ const useStyles = makeStyles({
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     transition: "background-color 1s ease",
     "@media (max-width: 1280px)": {
-      width: "80%",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divClose: {
@@ -278,15 +295,15 @@ const useStyles = makeStyles({
   textPopUp: {
     display: "flex",
     width: "100%",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     fontFamily: ["Dekko", "sans-serif"].join(","),
     color: colors.White,
-    fontSize: "5vh",
+    fontSize: "4vh",
     marginBottom: `0.5rem`,
     fontWeight: 900,
     "@media (max-width: 1280px)": {
-      fontSize: "4vh",
+      fontSize: "3vh",
     },
   },
 

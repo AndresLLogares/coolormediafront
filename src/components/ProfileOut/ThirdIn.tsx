@@ -52,7 +52,13 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     transition: "5s",
     "@media (max-width: 1280px)": {
-      width: "90%",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divTitle: {

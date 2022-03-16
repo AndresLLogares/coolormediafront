@@ -235,8 +235,13 @@ const useStyles = makeStyles({
     padding: "2rem",
     marginBottom: "2rem",
     "@media (max-width: 1280px)": {
-      padding: "1rem",
-      width: "90%",
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divAuthor: {
@@ -278,14 +283,15 @@ const useStyles = makeStyles({
 
   imagePost: {
     width: "640px",
-    height: "360px",
+    height: "480px",
     objectFit: `fill`,
     objectPosition: `center`,
-    boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
+    border: `.2rem solid ${colors.Black}`,
     borderRadius: "5px",
+    backgroundColor: colors.White,
     "@media (max-width: 1280px)": {
-      width: "100%",
-      height: "auto",
+      width: "320px",
+      height: "240px",
     },
   },
   divDescription: {
@@ -304,7 +310,7 @@ const useStyles = makeStyles({
     marginTop: "2rem",
     "@media (max-width: 1280px)": {
       padding: "1rem",
-      width: "90%",
+      width: "85%",
     },
   },
   description: {

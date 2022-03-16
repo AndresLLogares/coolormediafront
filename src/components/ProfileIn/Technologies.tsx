@@ -112,6 +112,15 @@ const useStyles = makeStyles({
     backgroundColor: colors.Purple,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
+    "@media (max-width: 1280px)": {
+      width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
+    },
   },
   divTitle: {
     display: "flex",

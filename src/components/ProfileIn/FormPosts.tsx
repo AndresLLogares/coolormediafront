@@ -78,14 +78,15 @@ export default function FormPosts(props: any): JSX.Element {
     toast.success("Successfully uploaded");
   };
 
+
   const handleSubmitPosts = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     let id = uuidv4();
     await axios
       .post(URL + "addposts", {
-        email: emailUser.toLocaleLowerCase(),
+        email: emailUser.toLowerCase(),
         id: id,
-        picture: user.profilePhoto,
+        picture: user?.profilePhoto || "https://res.cloudinary.com/andreslogares/image/upload/v1629471470/gjry7tvilh0z7wh5m4pn.gif",
         name: user.name + " " + user.lastname,
         useruuid: user.UUID,
         title: title,
@@ -94,6 +95,7 @@ export default function FormPosts(props: any): JSX.Element {
         description: description,
       })
       .then((response) => {
+        console.log(response.data);
         toast.success(response.data.message);
       });
     await dispatch(GETUSER(emailUser));
@@ -173,9 +175,15 @@ const useStyles = makeStyles({
     backgroundColor: colors.Purple,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
-    width: "80%",
+    width: "60%",
     "@media (max-width: 1280px)": {
       width: "100%",
+      borderWidth: "none",
+      borderRadius: "0px",
+      boxShadow: "none",
+      border: "none",
+      borderTop: `2px solid ${colors.Black}`,
+      borderBottom: `2px solid ${colors.Black}`,
     },
   },
   divTitle: {
@@ -288,15 +296,15 @@ const useStyles = makeStyles({
   },
   image: {
     width: "640px",
-    height: "360px",
+    height: "480px",
     objectFit: `fill`,
     objectPosition: `center`,
-    boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
+    border: `.2rem solid ${colors.Black}`,
     borderRadius: "5px",
     marginBottom: "2rem",
     "@media (max-width: 1280px)": {
-      width: "90%",
-      height: "auto",
+      width: "320px",
+      height: "240px",
     },
   },
   divButton: {

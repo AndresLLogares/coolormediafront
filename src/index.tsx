@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.scss";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Scroll from "./utils/scrollToTop";
 import Loading from "./components/Loading";
 const Landpage = lazy(() => import("./components/Landpage"));
@@ -31,6 +31,7 @@ ReactDOM.render(
           <Route path="/messages" element={<Messages />} />
           <Route path="/news" element={<News />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
     </Provider>

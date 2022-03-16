@@ -25,6 +25,12 @@ export default function Navbar(): JSX.Element {
 
   const allUsers: any = useSelector((state) => state);
 
+  let emailUser = localStorage.getItem("Email") || "";
+
+  if (emailUser === "") {
+    window.location.href = "https://coolormedia.netlify.app/";
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserSearch(e.target.value);
     setAuto(
@@ -40,7 +46,10 @@ export default function Navbar(): JSX.Element {
   const handleLogOut = async () => {
     await dispatch(LOGOUTUSER());
     await toast.success("Come back soon!");
-    setTimeout(() => (window.location.href = "https://coolormedia.netlify.app/"), 1000);
+    setTimeout(
+      () => (window.location.href = "https://coolormedia.netlify.app/"),
+      1000
+    );
   };
 
   useEffect(() => {
@@ -177,7 +186,7 @@ const useStyles = makeStyles({
     position: "fixed",
     top: 0,
     left: 0,
-    width: "25rem",
+    width: "20rem",
     height: "100%",
     flexDirection: "column",
     backgroundColor: `${colors.Blue}`,
@@ -198,7 +207,7 @@ const useStyles = makeStyles({
     position: "fixed",
     top: 0,
     left: 0,
-    width: "25rem",
+    width: "20rem",
     height: "100%",
     flexDirection: "column",
     backgroundColor: `${colors.Blue}`,
@@ -240,6 +249,10 @@ const useStyles = makeStyles({
     border: `0.2rem solid ${colors.Black}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     marginBottom: "2rem",
+    "@media (max-width: 1280px)": {
+      fontSize: "2vh",
+      height: "2.5rem",
+    },
   },
   divAuto: {
     display: "flex",
@@ -291,7 +304,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     width: "100%",
     height: "4rem",
-    backgroundColor: `${colors.Pink}`,
+    backgroundColor: `${colors.Black}`,
     fontFamily: ["Trispace", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
@@ -305,10 +318,13 @@ const useStyles = makeStyles({
     marginTop: "1rem",
     "&:hover": {
       cursor: "pointer",
-      backgroundColor: `${colors.Turquoise}`,
+      backgroundColor: `${colors.Yellow}`,
       color: colors.Black,
       borderBottom: `0.2rem solid ${colors.Black}`,
-
+    },
+    "@media (max-width: 1280px)": {
+      fontSize: "2vh",
+      height: "3rem",
     },
   },
   "@keyframes bounceOutLeft": {

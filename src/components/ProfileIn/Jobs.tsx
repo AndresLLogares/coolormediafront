@@ -47,63 +47,67 @@ export default function Jobs(props: any): JSX.Element {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.divTitle}>
-        <h3 className={styles.microTitles}>Work Experience</h3>
-      </div>
-      <div className={classes.divButton}>
-        <button
-          type="button"
-          onClick={() => {
-            setEdit(!edit);
-          }}
-          className={classes.button}
-        >
-          <Pen />
-        </button>
-      </div>
-      {edit ? (
-        <FormJobs setEdit={setEdit} />
-      ) : (
-        <Fragment>
-          <div className={classes.divSubtitle}>
-            <p className={classes.label}>Your work experience</p>
+    <Fragment>
+      {user?.coolor?.user?.jobs ? (
+        <div className={classes.root}>
+          <div className={classes.divTitle}>
+            <h3 className={styles.microTitles}>Work Experience</h3>
           </div>
-          <div className={classes.divList}>
-            {user?.coolor?.user?.jobs?.map((jobs: any, index: any) => {
-              return (
-                <div key={index} className={classes.divListItem}>
-                  <div className={classes.divButtonDelete}>
-                    <button
-                      onClick={() => handleDeleteJobs(jobs.Id)}
-                      className={classes.button}
-                    >
-                      <CloseCircle />
-                    </button>
-                  </div>
+          <div className={classes.divButton}>
+            <button
+              type="button"
+              onClick={() => {
+                setEdit(!edit);
+              }}
+              className={classes.button}
+            >
+              <Pen />
+            </button>
+          </div>
+          {edit ? (
+            <FormJobs setEdit={setEdit} />
+          ) : (
+            <Fragment>
+              <div className={classes.divSubtitle}>
+                <p className={classes.label}>Your work experience</p>
+              </div>
+              <div className={classes.divList}>
+                {user?.coolor?.user?.jobs?.map((jobs: any, index: any) => {
+                  return (
+                    <div key={index} className={classes.divListItem}>
+                      <div className={classes.divButtonDelete}>
+                        <button
+                          onClick={() => handleDeleteJobs(jobs.Id)}
+                          className={classes.button}
+                        >
+                          <CloseCircle />
+                        </button>
+                      </div>
 
-                  <p className={classes.information}>
-                    <CalendarDateFill className={classes.icons} />
-                    Date: ({jobs.startdate} / {jobs.enddate})
-                  </p>
-                  <p className={classes.information}>
-                    <Work className={classes.icons} />
-                    Company: {jobs.companyname}
-                  </p>
-                  <p className={classes.information}>
-                    <PositionForward className={classes.icons} />
-                    Job Position: {jobs.jobposition}
-                  </p>
-                  <p className={classes.information}>
-                    Description: {jobs.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </Fragment>
-      )}
-    </div>
+                      <p className={classes.information}>
+                        <CalendarDateFill className={classes.icons} />
+                        Date: ({jobs.startdate} / {jobs.enddate})
+                      </p>
+                      <p className={classes.information}>
+                        <Work className={classes.icons} />
+                        Company: {jobs.companyname}
+                      </p>
+                      <p className={classes.information}>
+                        <PositionForward className={classes.icons} />
+                        Job Position: {jobs.jobposition}
+                      </p>
+                      <p className={classes.information}>
+                        Description: {jobs.description}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </Fragment>
+          )}
+        </div>
+      ) : null}
+    </Fragment>
   );
 }
 const useStyles = makeStyles({
@@ -114,7 +118,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     flexDirection: "column",
     width: "60%",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     transition: "5s",
@@ -148,7 +152,7 @@ const useStyles = makeStyles({
   },
   title: {
     display: "flex",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontWeight: "900",
     color: colors.Black,
     fontSize: "5vh",
@@ -168,7 +172,7 @@ const useStyles = makeStyles({
     width: "4rem",
     height: "3rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -190,14 +194,14 @@ const useStyles = makeStyles({
   },
   label: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "4vh",
     margin: "0",
     marginBottom: "1rem",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
-      fontSize: "4vh",
+      fontSize: "3vh",
     },
   },
   divList: {
@@ -250,17 +254,17 @@ const useStyles = makeStyles({
     margin: "0",
     color: colors.Black,
     marginBottom: "1rem",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontWeight: "900",
-    fontSize: "3vh",
+    fontSize: "2.5vh",
     textOverflow: "ellipsis",
     overflow: "hidden",
     "@media (max-width: 1280px)": {
-      fontSize: "2.5vh",
+      fontSize: "2vh",
     },
   },
   icons: {
-    width: "3rem",
+    width: "2rem",
     height: "auto",
     marginRight: "1rem",
     "@media (max-width: 1280px)": {

@@ -47,65 +47,69 @@ export default function Education(props: any): JSX.Element {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.divTitle}>
-        <h3 className={styles.microTitles}>Education</h3>
-      </div>
-      <div className={classes.divButton}>
-        <button
-          type="button"
-          onClick={() => {
-            setEdit(!edit);
-          }}
-          className={classes.button}
-        >
-          <Pen />
-        </button>
-      </div>
-      {edit ? (
-        <FormEducation setEdit={setEdit} />
-      ) : (
-        <Fragment>
-          <div className={classes.divSubtitle}>
-            <p className={classes.label}>Your Education</p>
+    <Fragment>
+      {user?.coolor?.user?.education ? (
+        <div className={classes.root}>
+          <div className={classes.divTitle}>
+            <h3 className={styles.microTitles}>Education</h3>
           </div>
-          <div className={classes.divList}>
-            {user?.coolor?.user?.education?.map(
-              (education: any, index: any) => {
-                return (
-                  <div key={index} className={classes.divListItem}>
-                    <div className={classes.divButtonDelete}>
-                      <button
-                        onClick={() => handleDeleteEducation(education.Id)}
-                        className={classes.button}
-                      >
-                        <CloseCircle />
-                      </button>
-                    </div>
-                    <p className={classes.information}>
-                      <Institution className={classes.icons} />
-                      Institute: {education.institute}
-                    </p>
-                    <p className={classes.information}>
-                      <CalendarDateFill className={classes.icons} />
-                      Date: ({education.startdate} / {education.enddate})
-                    </p>
+          <div className={classes.divButton}>
+            <button
+              type="button"
+              onClick={() => {
+                setEdit(!edit);
+              }}
+              className={classes.button}
+            >
+              <Pen />
+            </button>
+          </div>
+          {edit ? (
+            <FormEducation setEdit={setEdit} />
+          ) : (
+            <Fragment>
+              <div className={classes.divSubtitle}>
+                <p className={classes.label}>Your Education</p>
+              </div>
+              <div className={classes.divList}>
+                {user?.coolor?.user?.education?.map(
+                  (education: any, index: any) => {
+                    return (
+                      <div key={index} className={classes.divListItem}>
+                        <div className={classes.divButtonDelete}>
+                          <button
+                            onClick={() => handleDeleteEducation(education.Id)}
+                            className={classes.button}
+                          >
+                            <CloseCircle />
+                          </button>
+                        </div>
+                        <p className={classes.information}>
+                          <Institution className={classes.icons} />
+                          Institute: {education.institute}
+                        </p>
+                        <p className={classes.information}>
+                          <CalendarDateFill className={classes.icons} />
+                          Date: ({education.startdate} / {education.enddate})
+                        </p>
 
-                    <p className={classes.information}>
-                      <Certificate className={classes.icons} />
-                      Degree: {education.degree}
-                    </p>
-                    <p className={classes.information}>
-                      Description: {education.description}
-                    </p>
-                  </div>
-                );
-              }
-            )}
-          </div>
-        </Fragment>
-      )}
-    </div>
+                        <p className={classes.information}>
+                          <Certificate className={classes.icons} />
+                          Degree: {education.degree}
+                        </p>
+                        <p className={classes.information}>
+                          Description: {education.description}
+                        </p>
+                      </div>
+                    );
+                  }
+                )}
+              </div>
+            </Fragment>
+          )}
+        </div>
+      ) : null}
+    </Fragment>
   );
 }
 const useStyles = makeStyles({
@@ -116,7 +120,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     flexDirection: "column",
     width: "60%",
-    backgroundColor: `${colors.Purple}`,
+    backgroundColor: `${colors.Blue}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     transition: "5s",
@@ -150,7 +154,7 @@ const useStyles = makeStyles({
   },
   title: {
     display: "flex",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontWeight: "900",
     color: colors.Black,
     fontSize: "5vh",
@@ -174,7 +178,7 @@ const useStyles = makeStyles({
     width: "4rem",
     height: "3rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -196,9 +200,9 @@ const useStyles = makeStyles({
   },
   label: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "4vh",
     margin: "0",
     marginBottom: "1rem",
     fontWeight: 900,
@@ -254,17 +258,17 @@ const useStyles = makeStyles({
     margin: "0",
     color: colors.Black,
     marginBottom: "1rem",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontWeight: "900",
-    fontSize: "3vh",
+    fontSize: "2.5vh",
     textOverflow: "ellipsis",
     overflow: "hidden",
     "@media (max-width: 1280px)": {
-      fontSize: "2.5vh",
+      fontSize: "2vh",
     },
   },
   icons: {
-    width: "3rem",
+    width: "2rem",
     height: "auto",
     marginRight: "1rem",
     "@media (max-width: 1280px)": {
@@ -273,5 +277,4 @@ const useStyles = makeStyles({
       marginRight: "0.5rem",
     },
   },
-
 });

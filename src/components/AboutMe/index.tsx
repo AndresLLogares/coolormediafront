@@ -8,82 +8,99 @@ import { Email } from "@styled-icons/evaicons-solid/Email";
 import { Github } from "@styled-icons/boxicons-logos/Github";
 import { Portfolio } from "@styled-icons/zondicons/Portfolio";
 import { TextDocument } from "@styled-icons/entypo/TextDocument";
+import styles from "../Title/title.module.scss";
+import Reveal from "react-awesome-reveal";
+import { keyframes } from "@emotion/react";
+
+const customAnimation = keyframes`
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 export default function AboutMe(props: any): JSX.Element {
   const classes = useStyles();
-  
+
   return (
     <Layout>
       <div className={classes.root}>
         <Title title={"About Me"} />
-        <div className={classes.sortBox}>
-          <div className={classes.box}>
-            <div className={classes.sortTitle}>
-              <h3 className={classes.subTitle}>
-                Hello, I am Andres, the person who has made this website, you
-                can contact me in the following ways
-              </h3>
-            </div>
-            <div className={classes.twoColumns}>
-              <div className={classes.columnOne}>
-                <a
-                  className={classes.button}
-                  style={{ textDecoration: "none" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://drive.google.com/file/d/1jkP_jCG66JDquoF5S_2Xm7YdkRo0C2gz/view?usp=sharing"
-                >
-                  <TextDocument className={classes.icons} />
-                  Resume
-                </a>
-                <a
-                  className={classes.button}
-                  style={{ textDecoration: "none" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://andreslogares.netlify.app/"
-                >
-                  <Portfolio className={classes.icons} />
-                  Portfolio
-                </a>
-                <a
-                  className={classes.button}
-                  style={{ textDecoration: "none" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://github.com/AndresLLogares"
-                >
-                  <Github className={classes.icons} />
-                  GitHub
-                </a>
-                <a
-                  className={classes.button}
-                  style={{ textDecoration: "none" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://www.linkedin.com/in/andres-logares/"
-                >
-                  <Linkedin className={classes.icons} />
-                  LinkeDIn
-                </a>
-                <a
-                  className={classes.button}
-                  style={{ textDecoration: "none" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  href="mailto:andresl940@hotmail.com"
-                >
-                  <Email className={classes.icons} />
-                  Email
-                </a>
+        <Reveal className={classes.reveal} keyframes={customAnimation}>
+          <div className={classes.sortBox}>
+            <div className={classes.box}>
+              <div className={classes.sortTitle}>
+                <h3 className={styles.miniTitle}>
+                  Hello, I am Andres, the person who has made this website, you
+                  can contact me in the following ways
+                </h3>
               </div>
+              <div className={classes.twoColumns}>
+                <div className={classes.columnOne}>
+                  <a
+                    className={classes.button}
+                    style={{ textDecoration: "none" }}
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://drive.google.com/file/d/1jkP_jCG66JDquoF5S_2Xm7YdkRo0C2gz/view?usp=sharing"
+                  >
+                    <TextDocument className={classes.icons} />
+                    Resume
+                  </a>
+                  <a
+                    className={classes.button}
+                    style={{ textDecoration: "none" }}
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://andreslogares.netlify.app/"
+                  >
+                    <Portfolio className={classes.icons} />
+                    Portfolio
+                  </a>
+                  <a
+                    className={classes.button}
+                    style={{ textDecoration: "none" }}
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://github.com/AndresLLogares"
+                  >
+                    <Github className={classes.icons} />
+                    GitHub
+                  </a>
+                  <a
+                    className={classes.button}
+                    style={{ textDecoration: "none" }}
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.linkedin.com/in/andres-logares/"
+                  >
+                    <Linkedin className={classes.icons} />
+                    LinkeDIn
+                  </a>
+                  <a
+                    className={classes.button}
+                    style={{ textDecoration: "none" }}
+                    target="_blank"
+                    rel="noreferrer"
+                    href="mailto:andresl940@hotmail.com"
+                  >
+                    <Email className={classes.icons} />
+                    Email
+                  </a>
+                </div>
 
-              <div className={classes.columnTwo}>
-                <img src={Hi} alt="Hi" className={classes.hi} />
+                <div className={classes.columnTwo}>
+                  <img src={Hi} alt="Hi" className={classes.hi} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </Layout>
   );
@@ -99,6 +116,16 @@ const useStyles = makeStyles({
     height: "fit-content",
     width: "100%",
     minHeight: "100vh",
+    "@media (max-width: 1280px)": {
+      paddingTop: "2rem",
+    }
+  },
+  reveal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
   sortBox: {
     display: "flex",
@@ -107,8 +134,11 @@ const useStyles = makeStyles({
     justifyContent: "center",
     width: "100%",
     height: "fit-content",
-    marginTop: "5rem",
-    marginBottom: "5rem",
+    marginTop: "3rem",
+    marginBottom: "3rem",
+    "@media (max-width: 1280px)": {
+      marginTop: "2rem",
+    }
   },
   box: {
     display: "flex",
@@ -117,7 +147,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     width: "60%",
     height: "fit-content",
-    backgroundColor: `${colors.Purple}`,
+    backgroundColor: `${colors.Blue}`,
     borderRadius: `255px 15px 225px 15px/15px 225px 15px 255px`,
     border: `0.2rem solid ${colors.Black}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
@@ -145,13 +175,13 @@ const useStyles = makeStyles({
   },
   subTitle: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "4vh",
     margin: "0",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
-      fontSize: "5vh",
+      fontSize: "4vh",
     },
   },
   twoColumns: {
@@ -204,7 +234,7 @@ const useStyles = makeStyles({
     margin: "1rem",
     height: "3rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

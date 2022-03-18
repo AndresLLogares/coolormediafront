@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, lazy, Suspense, Fragment } from "react";
 import { makeStyles } from "@mui/styles";
 import { colors } from "../../utils/colors";
 import Title from "../Title/Title";
@@ -16,10 +16,24 @@ import {
   GETPOSTBYUUID,
 } from "../../redux/actions";
 import Loading from "../Loading";
+import Reveal from "react-awesome-reveal";
+import { keyframes } from "@emotion/react";
 const First = lazy(() => import("./FirtsIn"));
 const Second = lazy(() => import("./SecondIn"));
 const Third = lazy(() => import("./ThirdIn"));
 const Fourth = lazy(() => import("./FourthIn"));
+
+const customAnimation = keyframes`
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 export default function ProfileOut(props: any): JSX.Element {
   const queryParams = new URLSearchParams(window.location.search);
@@ -73,35 +87,51 @@ export default function ProfileOut(props: any): JSX.Element {
 
   return (
     <Layout>
-      <Suspense fallback={<Loading />}>
-        <div className={classes.root}>
-          <Title title={`${userByUUID.fullname}`} />
-          {userByUUID.uuid !== currentUser?.UUID ? (
-            <div className={classes.divButton}>
-              <button
-                type="button"
-                className={classes.button}
-                onClick={handleAddContact}
+      <Fragment>
+        {userByUUID?.fullname ? (
+          <Suspense fallback={<Loading />}>
+            <div className={classes.root}>
+              <Title title={`${userByUUID.fullname}`} />
+              {userByUUID.uuid !== currentUser?.UUID ? (
+                <div className={classes.divButton}>
+                  <button
+                    type="button"
+                    className={classes.button}
+                    onClick={handleAddContact}
+                  >
+                    <AddUser className={classes.icon} />
+                    Add friend
+                  </button>
+                </div>
+              ) : null}
+              <Reveal
+                className={classes.eachComponent}
+                keyframes={customAnimation}
               >
-                <AddUser className={classes.icon} />
-                Add friend
-              </button>
+                <First user={userByUUID} />
+              </Reveal>
+              <Reveal
+                className={classes.eachComponent}
+                keyframes={customAnimation}
+              >
+                <Second user={userByUUID} />
+              </Reveal>
+              <Reveal
+                className={classes.eachComponent}
+                keyframes={customAnimation}
+              >
+                <Third user={userByUUID} />
+              </Reveal>
+              <Reveal
+                className={classes.eachComponent}
+                keyframes={customAnimation}
+              >
+                <Fourth uuid={UUID} />
+              </Reveal>
             </div>
-          ) : null}
-          <div className={classes.eachComponent}>
-            <First user={userByUUID} />
-          </div>
-          <div className={classes.eachComponent}>
-            <Second user={userByUUID} />
-          </div>
-          <div className={classes.eachComponent}>
-            <Third user={userByUUID} />
-          </div>
-          <div className={classes.eachComponent}>
-            <Fourth uuid={UUID} />
-          </div>
-        </div>
-      </Suspense>
+          </Suspense>
+        ) : null}
+      </Fragment>
     </Layout>
   );
 }
@@ -111,11 +141,14 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingTop: "5rem",
+    paddingTop: "2rem",
     flexDirection: "column",
     height: "fit-content",
     width: "100%",
     minHeight: "100vh",
+    "@media (max-width: 1280px)": {
+      paddingTop: "2rem",
+    }
   },
   eachComponent: {
     display: "flex",
@@ -124,6 +157,9 @@ const useStyles = makeStyles({
     width: "100%",
     height: "fit-content",
     marginBottom: "5rem",
+    "@media (max-width: 1280px)": {
+      marginBottom: "2rem",
+    }
   },
   divButton: {
     display: "flex",
@@ -132,6 +168,9 @@ const useStyles = makeStyles({
     width: "100%",
     height: "fit-content",
     marginTop: "5rem",
+    "@media (max-width: 1280px)": {
+      marginBottom: "2rem",
+    }
   },
   button: {
     display: "flex",
@@ -140,7 +179,7 @@ const useStyles = makeStyles({
     width: "20rem",
     height: "5rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

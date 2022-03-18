@@ -1,10 +1,10 @@
-$Purple: #9b5de5;
-$Pink: #f15bb5;
+$Blue: #482673;
+$Pink: #f75bb8;
 $Yellow: #fee440;
 $Blue: #00bbf9;
-$Turquoise: #00f5d4;
 $White: #ffffff;
-$Black: #231b1b;
+$Black: #050505;
+$Soft: #fba214;
 
 html,
 body {
@@ -12,15 +12,19 @@ body {
   padding: 0;
   width: 100%;
   height: fit-content;
-  background-color: #ffffff;
   justify-items: center;
   align-items: center;
-  background-image: url(./assets/Background.png);
+  background-color: #D3D3D3;
+  background-image: url(./assets/Back.webp);
+  background-size: 2200px 2200px;
   background-repeat: repeat;
-  background-position: center top;
-  background-size:1200px 1200px;
 }
-
+@media screen and (max-width: 1280px) {
+  html,
+  body {
+    background-size: 500px 500px;
+  }
+}
 input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;

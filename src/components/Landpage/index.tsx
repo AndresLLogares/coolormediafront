@@ -9,7 +9,7 @@ import SignUp from "../Login/SignUp";
 import { Toaster } from "react-hot-toast";
 
 const MySwitch = styled(Switch)(({ theme }) => ({
-  width: 50,
+  width: 42,
   height: 26,
   padding: 0,
   "& .MuiSwitch-switchBase": {
@@ -17,10 +17,10 @@ const MySwitch = styled(Switch)(({ theme }) => ({
     margin: 2,
     transitionDuration: "300ms",
     "&.Mui-checked": {
-      transform: "translateX(25px)",
-      color: colors.Black,
+      transform: "translateX(16px)",
+      color: "#fff",
       "& + .MuiSwitch-track": {
-        backgroundColor: colors.Pink,
+        backgroundColor: theme.palette.mode === "dark" ? "#FFDE00" : "#FFDE00",
         opacity: 1,
         border: 0,
       },
@@ -28,8 +28,18 @@ const MySwitch = styled(Switch)(({ theme }) => ({
         opacity: 0.5,
       },
     },
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
+    },
     "&.Mui-disabled .MuiSwitch-thumb": {
-      color: colors.Yellow,
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
+    },
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
     },
   },
   "& .MuiSwitch-thumb": {
@@ -39,7 +49,7 @@ const MySwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: colors.Blue,
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,
@@ -104,15 +114,10 @@ const useStyles = makeStyles({
     textAlign: "center",
     justifyContent: "center",
     padding: "1rem",
-    backgroundColor: colors.Blue,
-    borderRadius: "5px",
-    border: `0.2rem solid ${colors.Black}`,
-    boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     "@media (max-width: 1280px)": {
       width: "85%",
     },
   },
-
   divSwitch: {
     display: "flex",
     width: "30%",
@@ -121,19 +126,20 @@ const useStyles = makeStyles({
     textAlign: "center",
     justifyContent: "center",
     marginBottom: "2rem",
-    backgroundColor: colors.Turquoise,
+    backgroundColor: colors.Blue,
     borderRadius: "5px",
     border: `0.2rem solid ${colors.Black}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
+    animation: `$scale-in-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
     "@media (max-width: 1280px)": {
       width: "85%",
     },
   },
   textSwitch: {
-    fontFamily: ["Dekko", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontWeight: "900",
     color: colors.Black,
-    fontSize: "5vh",
+    fontSize: "4vh",
     marginTop: "0.5rem",
     marginBottom: "0.5rem",
   },
@@ -145,5 +151,15 @@ const useStyles = makeStyles({
     height: "fit-content",
     marginTop: "5rem",
     marginBottom: "5rem",
+  },
+  "@keyframes scale-in-center": {
+    "0%": {
+      transform: "scale(0)",
+      opacity: 0,
+    },
+    "100%": {
+      opacity: 1,
+      transform: "scale(1)",
+    },
   },
 });

@@ -208,13 +208,13 @@ const useStyles = makeStyles({
   },
   title: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "4vh",
     margin: "0",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
-      fontSize: "4vh",
+      fontSize: "3vh",
     },
   },
   divWrapper: {
@@ -262,8 +262,8 @@ const useStyles = makeStyles({
     width: "80%",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
     fontSize: "3vh",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
@@ -273,7 +273,7 @@ const useStyles = makeStyles({
   },
   input: {
     width: "80%",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     padding: "1rem",
@@ -286,7 +286,7 @@ const useStyles = makeStyles({
   },
   textarea: {
     width: "80%",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     padding: "1rem",
@@ -316,7 +316,7 @@ const useStyles = makeStyles({
     width: "20rem",
     height: "5rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

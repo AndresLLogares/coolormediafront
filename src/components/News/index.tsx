@@ -5,6 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import Title from "../Title/Title";
 import Layout from "../Layout/index";
 import { GETNEWS } from "../../redux/actions";
+import Reveal from "react-awesome-reveal";
+import { keyframes } from "@emotion/react";
+
+const customAnimation = keyframes`
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 export default function News(props: any): JSX.Element {
   const classes = useStyles();
@@ -28,28 +42,34 @@ export default function News(props: any): JSX.Element {
         <div className={classes.container}>
           {news &&
             news.map((item: any, index: number) => (
-              <div className={classes.eachNew} key={index}>
-                <div className={classes.divTitle}>
-                  <h3 className={classes.title}>{item.title}</h3>
+              <Reveal className={classes.reveal} keyframes={customAnimation}>
+                <div className={classes.eachNew} key={index}>
+                  <div className={classes.divTitle}>
+                    <h3 className={classes.title}>{item.title}</h3>
+                  </div>
+                  <div className={classes.divImage}>
+                    <img
+                      alt=""
+                      className={classes.image}
+                      src={item.urlToImage}
+                    />
+                  </div>
+                  <div className={classes.divDescription}>
+                    <p className={classes.description}>{item.description}</p>
+                  </div>
+                  <div className={classes.divButton}>
+                    <a
+                      style={{ textDecoration: "none" }}
+                      target="_blank"
+                      className={classes.eachLink}
+                      rel="noreferrer"
+                      href={item.url}
+                    >
+                      <button className={classes.button}>Read More</button>
+                    </a>
+                  </div>
                 </div>
-                <div className={classes.divImage}>
-                  <img alt="" className={classes.image} src={item.urlToImage} />
-                </div>
-                <div className={classes.divDescription}>
-                  <p className={classes.description}>{item.description}</p>
-                </div>
-                <div className={classes.divButton}>
-                  <a
-                    style={{ textDecoration: "none" }}
-                    target="_blank"
-                    className={classes.eachLink}
-                    rel="noreferrer"
-                    href={item.url}
-                  >
-                    <button className={classes.button}>Read More</button>
-                  </a>
-                </div>
-              </div>
+              </Reveal>
             ))}
         </div>
       </div>
@@ -68,14 +88,21 @@ const useStyles = makeStyles({
     width: "100%",
     minHeight: "100vh",
   },
+  reveal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+  },
   container: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    marginTop: "5rem",
-    marginBottom: "5rem",
+    marginTop: "3rem",
+    marginBottom: "3rem",
     width: "60%",
     "@media (max-width: 1280px)": {
       width: "100%",
@@ -91,7 +118,7 @@ const useStyles = makeStyles({
     marginBottom: "2rem",
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     "@media (max-width: 1280px)": {
       width: "100%",
       borderWidth: "none",
@@ -117,10 +144,10 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
-    fontSize: "4vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    fontSize: "3vh",
     fontWeight: 900,
-    color: colors.White,
+    color: colors.Black,
     "@media (max-width: 1280px)": {
       fontSize: "3vh",
     },
@@ -171,10 +198,10 @@ const useStyles = makeStyles({
     alignItems: "center",
     width: "100%",
     justifyContent: "center",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "3vh",
     fontWeight: 900,
-    color: colors.Black,    
+    color: colors.Black,
     "@media (max-width: 1280px)": {
       fontSize: "2.5vh",
     },
@@ -203,7 +230,7 @@ const useStyles = makeStyles({
     height: "5rem",
     marginTop: "2rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

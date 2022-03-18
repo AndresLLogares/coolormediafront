@@ -14,7 +14,7 @@ export default function GlobalPopUp(props: any): JSX.Element {
       width: `${props.width}`,
       height: `${props.height}`,
       backgroundColor: `${props.backgroundColor}`,
-      fontFamily: ["Trispace", "sans-serif"].join(","),
+      fontFamily: ["Noto Sans", "sans-serif"].join(","),
       fontWeight: "900",
       fontSize: "3vh",
       padding: "1rem",

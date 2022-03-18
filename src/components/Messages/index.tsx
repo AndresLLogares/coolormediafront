@@ -9,8 +9,20 @@ import axios from "axios";
 import { URL } from "../../utils/url";
 import toast from "react-hot-toast";
 import styles from "../Title/title.module.scss";
-import { CheckCircle } from "@styled-icons/boxicons-regular/CheckCircle";
-import { CloseCircleOutline } from "@styled-icons/evaicons-outline/CloseCircleOutline";
+import Reveal from "react-awesome-reveal";
+import { keyframes } from "@emotion/react";
+
+const customAnimation = keyframes`
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 export default function Friends(props: any): JSX.Element {
   const dispatch = useDispatch();
@@ -47,6 +59,8 @@ export default function Friends(props: any): JSX.Element {
   }, [dispatch, emailUser, update]);
 
   const handleFriend = (email: string, uuid: string, name: string) => {
+    let filterd = friends.filter((item: any) => item.uuid === uuid);
+    console.log(filterd[0].messages);
     setFriendToMessage(email);
     setUuidMessage(uuid);
     setFriendName(name);
@@ -61,6 +75,7 @@ export default function Friends(props: any): JSX.Element {
       .post(URL + "handlemessage", {
         date: Date.now(),
         uuid: uuidMessage,
+        alert: true,
         message: message,
         from: currentUser.fullname,
       })
@@ -77,111 +92,124 @@ export default function Friends(props: any): JSX.Element {
     <Layout>
       <div className={classes.root}>
         <Title title={"Messages"} />
-        <div className={classes.boxFriends}>
-          {booleanFriends.length === 0 ? (
-            <div className={classes.divTitle}>
-              <p className={styles.miniTitle}>
-                You don't have any friends {currentUser.fullname}
-              </p>
-            </div>
-          ) : (
-            <Fragment>
-              <div className={classes.divSub}>
-                <p className={classes.label}>
-                  Select a friend to send a message
+        <Reveal className={classes.reveal} keyframes={customAnimation}>
+          <div className={classes.boxFriends}>
+            {booleanFriends.length === 0 ? (
+              <div className={classes.divTitle}>
+                <p className={styles.miniTitle}>
+                  You don't have any friends {currentUser.fullname}
                 </p>
               </div>
-              <div className={classes.divFriends}>
-                {booleanFriends &&
-                  booleanFriends.map((item: any, index: number) => {
-                    return (
-                      <button
-                        onClick={() =>
-                          handleFriend(
-                            item.emailfriend,
-                            item.uuid,
-                            item.namefriend
-                          )
-                        }
-                        className={classes.divFriend}
-                        key={index}
-                      >
-                        {!item.request ? (
-                          <div className={classes.divFriendName}>
-                            <p className={classes.textNone}>
-                              {item.namefriend}
-                            </p>
-                          </div>
-                        ) : (
-                          <p className={classes.textNone}>No Friends</p>
-                        )}
-                      </button>
-                    );
-                  })}
-              </div>
-            </Fragment>
-          )}
-        </div>
+            ) : (
+              <Fragment>
+                <div className={classes.divSub}>
+                  <p className={classes.label}>
+                    Select a friend to send a message
+                  </p>
+                </div>
+                <div className={classes.divFriends}>
+                  {booleanFriends &&
+                    booleanFriends.map((item: any, index: number) => {
+                      return (
+                        <button
+                          onClick={() =>
+                            handleFriend(
+                              item.emailfriend,
+                              item.uuid,
+                              item.namefriend
+                            )
+                          }
+                          className={classes.divFriend}
+                          key={index}
+                        >
+                          {!item.request ? (
+                            <div className={classes.divFriendName}>
+                              <p className={classes.textNone}>
+                                {item.namefriend}
+                              </p>
+                            </div>
+                          ) : (
+                            <p className={classes.textNone}>No Friends</p>
+                          )}
+                        </button>
+                      );
+                    })}
+                </div>
+              </Fragment>
+            )}
+          </div>
+        </Reveal>
         <div className={classes.boxMessages}>
-          {friendToMessage === "" ? null : (
-            <Fragment>
-              <div className={classes.divSub}>
-                <p className={classes.label}>Your messages with {friendName}</p>
-              </div>
-              <div className={classes.boxAllMessages}>
-                {friends &&
-                  friends
-                    .filter((item: any) => item.emailfriend === friendToMessage)
-                    .map((item: any, key: number) => (
-                      <Fragment>
-                        {item.messages.length !== 0 ? (
-                          <Fragment>
-                            {item.messages.map(
-                              (messages: any, index: number) => (
-                                <div className={classes.sortMessage} key={key}>
-                                  {messages.from === currentUser.fullname ? (
-                                    <p className={classes.message}>From: Me</p>
-                                  ) : (
+          <Reveal className={classes.reveal} keyframes={customAnimation}>
+            {friendToMessage === "" ? null : (
+              <Fragment>
+                <div className={classes.divSub}>
+                  <p className={classes.label}>
+                    Your messages with {friendName}
+                  </p>
+                </div>
+                <div className={classes.boxAllMessages}>
+                  {friends &&
+                    friends
+                      .filter(
+                        (item: any) => item.emailfriend === friendToMessage
+                      )
+                      .map((item: any, key: number) => (
+                        <Fragment>
+                          {item.messages.length !== 0 ? (
+                            <Fragment>
+                              {item.messages.map(
+                                (messages: any, index: number) => (
+                                  <div
+                                    className={classes.sortMessage}
+                                    key={key}
+                                  >
+                                    {messages.from === currentUser.fullname ? (
+                                      <p className={classes.message}>
+                                        From: Me
+                                      </p>
+                                    ) : (
+                                      <p className={classes.message}>
+                                        From: {item.namefriend}
+                                      </p>
+                                    )}
                                     <p className={classes.message}>
-                                      From: {item.namefriend}
+                                      {messages.message}
                                     </p>
-                                  )}
-                                  <p className={classes.message}>
-                                    {messages.message}
-                                  </p>
-                                  <hr className={classes.hr} />
-                                </div>
-                              )
-                            )}
-                          </Fragment>
-                        ) : (
-                          <p className={classes.message}>
-                            Send your first message to {friendName}{" "}
-                          </p>
-                        )}
-                      </Fragment>
-                    ))}
-              </div>
-              <div className={classes.boxForm}>
-                <form onSubmit={handleSubmitMessage} className={classes.form}>
-                  <div className={classes.divTextArea}>
-                    <label className={classes.label}>Message</label>
-                    <textarea
-                      required={true}
-                      className={classes.textArea}
-                      value={message}
-                      onChange={(e: any) => setMessage(e.target.value)}
-                    />
-                  </div>
-                  <div className={classes.divButton}>
-                    <button type="submit" className={classes.button}>
-                      Send
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </Fragment>
-          )}
+                                    <hr className={classes.hr} />
+                                  </div>
+                                )
+                              )}
+                            </Fragment>
+                          ) : (
+                            <p className={classes.message}>
+                              Send your first message to {friendName}{" "}
+                            </p>
+                          )}
+                        </Fragment>
+                      ))}
+                </div>
+                <div className={classes.boxForm}>
+                  <form onSubmit={handleSubmitMessage} className={classes.form}>
+                    <div className={classes.divTextArea}>
+                      <label className={classes.label}>Message</label>
+                      <textarea
+                        required={true}
+                        className={classes.textArea}
+                        value={message}
+                        onChange={(e: any) => setMessage(e.target.value)}
+                      />
+                    </div>
+                    <div className={classes.divButton}>
+                      <button type="submit" className={classes.button}>
+                        Send
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </Fragment>
+            )}
+          </Reveal>
         </div>
       </div>
     </Layout>
@@ -199,6 +227,14 @@ const useStyles = makeStyles({
     width: "100%",
     minHeight: "100vh",
   },
+  reveal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+  },
   boxFriends: {
     display: "flex",
     alignItems: "center",
@@ -209,7 +245,7 @@ const useStyles = makeStyles({
     width: "60%",
     height: "25rem",
     overflowY: "scroll",
-    backgroundColor: `${colors.Purple}`,
+    backgroundColor: `${colors.Blue}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     transition: "5s",
@@ -233,7 +269,7 @@ const useStyles = makeStyles({
     marginBottom: "5rem",
     width: "60%",
     height: "fit-content",
-    backgroundColor: `${colors.Purple}`,
+    backgroundColor: `${colors.Blue}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     transitionDuration: "5s",
@@ -255,7 +291,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     marginTop: "3rem",
     marginBottom: "3rem",
-    width: "80%",
+    width: "95%",
     "@media (max-width: 1280px)": {
       width: "90%",
       alignItems: "flex-start",
@@ -275,14 +311,14 @@ const useStyles = makeStyles({
   },
   label: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "4vh",
     margin: "0",
     marginBottom: "1rem",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
-      fontSize: "4vh",
+      fontSize: "3vh",
     },
   },
   divFriends: {
@@ -301,14 +337,14 @@ const useStyles = makeStyles({
   },
   divFriend: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "flex-start",
     textAlign: "center",
     flexDirection: "row",
-    width: "45%",
+    width: "40%",
     height: "fit-content",
-    padding: "1rem",
-    backgroundColor: `${colors.Blue}`,
+    padding: "0.5rem",
+    backgroundColor: `${colors.Pink}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     marginRight: "1rem",
@@ -329,31 +365,12 @@ const useStyles = makeStyles({
       justifyContent: "center",
     },
   },
-  divFriendPhoto: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    width: "10rem",
-    height: "10rem",
-    backgroundColor: colors.Yellow,
-    boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
-    borderRadius: "5px",
-  },
-  profilePhoto: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
-    objectFit: `cover`,
-    objectPosition: `center`,
-  },
   textNone: {
     display: "flex",
-    alignItems: "center",
+    width: "100%",
+    alignItems: "flex-start",
     justifyContent: "flex-start",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "3vh",
     fontWeight: 900,
     marginBottom: "0.5rem",
@@ -366,14 +383,11 @@ const useStyles = makeStyles({
     justifyContent: "flex-start",
     textAlign: "center",
     flexDirection: "column",
-    width: "35%",
+    width: "100%",
     height: "fit-content",
-    marginLeft: "5rem",
+    marginLeft: "1rem",
     "@media (max-width: 1280px)": {
       width: "100%",
-      marginLeft: "0",
-      alignItems: "center",
-      justifyContent: "center",
     },
   },
   boxAllMessages: {
@@ -412,7 +426,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     width: "100%",
     height: "fit-content",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2.5vh",
     fontWeight: 900,
     marginTop: "0.5rem",
@@ -422,7 +436,7 @@ const useStyles = makeStyles({
   },
   hr: {
     width: "90%",
-    backgroundColor: colors.Blue,
+    backgroundColor: colors.Pink,
     border: "transparent",
     borderRadius: "5px",
     height: "0.5rem",
@@ -464,7 +478,7 @@ const useStyles = makeStyles({
   },
   textArea: {
     width: "100%",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     padding: "1rem",
@@ -493,7 +507,7 @@ const useStyles = makeStyles({
     width: "20rem",
     height: "4rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

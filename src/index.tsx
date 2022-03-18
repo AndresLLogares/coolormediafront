@@ -16,7 +16,11 @@ const Messages = lazy(() => import("./components/Messages"));
 const News = lazy(() => import("./components/News"));
 const Reset = lazy(() => import("./components/Login/Reset"));
 
+window.onbeforeunload = () => {
+  window.scrollTo(0, 0);
+};
 ReactDOM.render(
+  
   <BrowserRouter>
     <Provider store={store}>
       <Scroll />

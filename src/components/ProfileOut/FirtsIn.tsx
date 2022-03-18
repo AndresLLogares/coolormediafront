@@ -76,7 +76,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    paddingTop: "5rem",
+    paddingTop: "2rem",
     width: "100%",
   },
   container: {
@@ -120,7 +120,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "5vh",
     fontWeight: 900,
     color: colors.Black,
@@ -142,7 +142,7 @@ const useStyles = makeStyles({
     height: "3rem",
     marginTop: "2rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -221,7 +221,7 @@ const useStyles = makeStyles({
     marginBottom: "1rem",
     padding: "1rem",
     flexDirection: "column",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     "@media (max-width: 1280px)": {
@@ -230,13 +230,13 @@ const useStyles = makeStyles({
   },
   information: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "3vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "2vh",
     margin: "0",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
-      fontSize: "3vh",
+      fontSize: "2vh",
     },
   },
   secondColumn: {
@@ -256,7 +256,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     flexDirection: "column",
     width: "100%",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     "@media (max-width: 1280px)": {
@@ -305,9 +305,9 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     width: "30%",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     color: colors.Black,
-    fontSize: "3vh",
+    fontSize: "2vh",
     marginRight: "1rem",
     marginBottom: "1rem",
     padding: "0.5rem",
@@ -317,11 +317,11 @@ const useStyles = makeStyles({
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     "@media (max-width: 1280px)": {
       width: "80%",
-      marginRight: "0",
     },
   },
   iconsTechno: {
     color: colors.Black,
     width: "3rem",
+    marginRight: "1rem",
   },
 });

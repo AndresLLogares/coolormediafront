@@ -35,8 +35,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
     flexDirection: "column",
     width: "100%",
-    marginTop: "5rem",
-    marginBottom: "5rem",
+    marginTop: "3rem",
+    marginBottom: "3rem",
     height: "fit-content",
   },
 });

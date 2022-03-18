@@ -10,6 +10,20 @@ import { Like } from "@styled-icons/boxicons-solid/Like";
 import PopUpComment from "./PopUpCommentHome";
 import { getTime } from "../ProfileIn/GetTime";
 import styles from "../Title/title.module.scss";
+import Reveal from "react-awesome-reveal";
+import { keyframes } from "@emotion/react";
+
+const customAnimation = keyframes`
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 export default function PostsHome(props: any): JSX.Element {
   const classes = useStyles();
@@ -65,69 +79,77 @@ export default function PostsHome(props: any): JSX.Element {
       ) : null}
       {posts?.map((post: any) => {
         return (
-          <div className={classes.eachPost} key={post.Id}>
-            <div className={classes.divAuthor}>
-              <a
-                target="_blank"
-                className={classes.eachLink}
-                rel="noreferrer"
-                href={`https://coolormedia.netlify.app/profileOut?uuid=${post.useruuid}`}
-              >
-                <p className={classes.name}>{post.name}</p>
-              </a>
-            </div>
-            <div className={classes.divTitlePost}>
-              <h3 className={styles.microTitles}>{post.title}</h3>
-            </div>
-            {post?.image ? (
-              <img src={post.image} alt="post" className={classes.imagePost} />
-            ) : null}
-            <div className={classes.divDescription}>
-              <p className={classes.description}>{post.description}</p>
-            </div>
-            <div className={classes.divSeparate}>
-              <div className={classes.first}>
-                <button
-                  onClick={() => handleLikeAdd(post.Id)}
-                  disabled={disabled}
-                  type="button"
-                  className={classes.button}
+          <Reveal className={classes.reveal} keyframes={customAnimation}>
+            <div className={classes.eachPost} key={post.Id}>
+              <div className={classes.divAuthor}>
+                <a
+                  target="_blank"
+                  className={classes.eachLink}
+                  rel="noreferrer"
+                  href={`https://coolormedia.netlify.app/profileOut?uuid=${post.useruuid}`}
                 >
-                  <Like />
-                </button>
-                <button className={classes.number}>{post.likes.length}</button>
+                  <p className={classes.name}>{post.name}</p>
+                </a>
               </div>
-              <div className={classes.second}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIdComment(post.Id);
-                    setPopUp(!popUp);
-                  }}
-                  className={classes.buttonComment}
-                >
-                  Comment
-                </button>
+              <div className={classes.divTitlePost}>
+                <h3 className={styles.microTitles}>{post.title}</h3>
               </div>
+              {post?.image ? (
+                <img
+                  src={post.image}
+                  alt="post"
+                  className={classes.imagePost}
+                />
+              ) : null}
+              <div className={classes.divDescription}>
+                <p className={classes.description}>{post.description}</p>
+              </div>
+              <div className={classes.divSeparate}>
+                <div className={classes.first}>
+                  <button
+                    onClick={() => handleLikeAdd(post.Id)}
+                    disabled={disabled}
+                    type="button"
+                    className={classes.button}
+                  >
+                    <Like />
+                  </button>
+                  <button className={classes.number}>
+                    {post.likes.length}
+                  </button>
+                </div>
+                <div className={classes.second}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIdComment(post.Id);
+                      setPopUp(!popUp);
+                    }}
+                    className={classes.buttonComment}
+                  >
+                    Comment
+                  </button>
+                </div>
+              </div>
+              {post?.comments &&
+                post.comments.map((comment: any) => {
+                  return (
+                    <div className={classes.divDescription} key={comment.id}>
+                      <div className={classes.divSeparate}>
+                        <p className={classes.description}>{comment.name}</p>
+                        <p className={classes.description}>
+                          {getTime(new Date(comment.date))}
+                        </p>
+                      </div>
+                      <hr className={classes.hr} />
+                      <div className={classes.divCommentContent}>
+                        <p className={classes.description}>{comment.comment}</p>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
-            {post?.comments &&
-              post.comments.map((comment: any) => {
-                return (
-                  <div className={classes.divDescription} key={comment.id}>
-                    <div className={classes.divSeparate}>
-                      <p className={classes.description}>{comment.name}</p>
-                      <p className={classes.description}>
-                        {getTime(new Date(comment.date))}
-                      </p>
-                    </div>
-                    <hr className={classes.hr} />
-                    <div className={classes.divCommentContent}>
-                      <p className={classes.description}>{comment.comment}</p>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
+          </Reveal>
         );
       })}
     </Fragment>
@@ -141,7 +163,7 @@ const useStyles = makeStyles({
     width: "5rem",
     height: "4rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -168,6 +190,13 @@ const useStyles = makeStyles({
     width: "fit-content",
     textDecoration: "none",
   },
+  reveal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+  },
   eachPost: {
     display: "flex",
     alignItems: "center",
@@ -175,7 +204,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     flexDirection: "column",
     width: "50%",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     border: `2px solid ${colors.Black}`,
     borderRadius: "5px",
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
@@ -202,7 +231,7 @@ const useStyles = makeStyles({
   },
   name: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     color: colors.White,
     fontSize: "4vh",
     margin: "0",
@@ -232,7 +261,7 @@ const useStyles = makeStyles({
   },
   titlePost: {
     display: "flex",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontWeight: "900",
     color: colors.Black,
     fontSize: "4vh",
@@ -276,7 +305,7 @@ const useStyles = makeStyles({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     textAlign: "left",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     color: colors.Black,
@@ -316,7 +345,7 @@ const useStyles = makeStyles({
     width: "5rem",
     height: "4rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -350,7 +379,7 @@ const useStyles = makeStyles({
     width: "15rem",
     height: "4rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 import styles from "../Title/title.module.scss";
 
-export default function SignUp(props:any): JSX.Element {
+export default function SignUp(props: any): JSX.Element {
   const classes = useStyles();
 
   const [information, setInformation] = useState({
@@ -218,7 +218,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     width: "50%",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     height: "fit-content",
     minHeight: "50vh",
     alignItems: "center",
@@ -229,7 +229,7 @@ const useStyles = makeStyles({
     borderWidth: "3px 4px 3px 5px",
     borderRadius: "95% 4% 92% 5%/4% 95% 6% 95%",
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
-    transition: "background-color 1s ease",
+    animation: `$scale-in-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,
     "@media (max-width: 1280px)": {
       width: "100%",
       borderWidth: "none",
@@ -272,9 +272,9 @@ const useStyles = makeStyles({
     width: "100%",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "3vh",
     marginBottom: `0.5rem`,
     fontWeight: 900,
     "@media (max-width: 1280px)": {
@@ -283,14 +283,14 @@ const useStyles = makeStyles({
   },
   input: {
     width: "100%",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     padding: "1rem",
     borderRadius: "5px",
     border: `0.2rem solid ${colors.Black}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
-    '&:disabled': {
+    "&:disabled": {
       backgroundColor: colors.White,
     },
   },
@@ -312,7 +312,7 @@ const useStyles = makeStyles({
     width: "20rem",
     height: "5rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -330,6 +330,16 @@ const useStyles = makeStyles({
       left: "4px",
       top: "4px",
       boxShadow: `0 0 0 0 ${colors.Black}`,
+    },
+  },
+  "@keyframes scale-in-center": {
+    "0%": {
+      transform: "scale(0)",
+      opacity: 0,
+    },
+    "100%": {
+      opacity: 1,
+      transform: "scale(1)",
     },
   },
 });

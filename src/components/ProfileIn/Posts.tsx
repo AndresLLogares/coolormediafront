@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { makeStyles } from "@mui/styles";
 import { colors } from "../../utils/colors";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,109 +76,118 @@ export default function Posts(props: any): JSX.Element {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.divTitle}>
-        <h3 className={styles.microTitles}>Posts</h3>
-      </div>
-      <div className={classes.divButton}>
-        <button
-          type="button"
-          onClick={() => {
-            setEdit(!edit);
-          }}
-          className={classes.button}
-        >
-          <Pen />
-        </button>
-      </div>
-      {edit ? (
-        <FormPosts setEdit={setEdit} />
-      ) : (
-        <div className={classes.boxPosts}>
-          {popUp ? (
-            <PopUpComment idComment={idComment} setPopUp={setPopUp} />
-          ) : null}
-          <div className={classes.divSubtitle}>
-            <p className={classes.label}> Your Posts</p>
+    <Fragment>
+      {user?.coolor?.postuser?.posts ? (
+        <div className={classes.root}>
+          <div className={classes.divTitle}>
+            <h3 className={styles.microTitles}>Posts</h3>
           </div>
-          {posts?.map((post: any) => {
-            return (
-              <div className={classes.eachPost} key={post.Id}>
-                <div className={classes.divAuthor}>
-                  <p className={classes.name}>{post.name}</p>
-                  <button
-                    onClick={() => handleDeletePost(post.Id)}
-                    className={classes.button}
-                    type="button"
-                  >
-                    <CloseCircle />
-                  </button>
-                </div>
-                <div className={classes.divTitlePost}>
-                  <h3 className={styles.microTitles}>{post.title}</h3>
-                </div>
-                {post?.image ? (
-                  <img
-                    src={post.image}
-                    alt="post"
-                    className={classes.imagePost}
-                  />
-                ) : null}
-                <div className={classes.divDescription}>
-                  <p className={classes.description}>{post.description}</p>
-                </div>
-                <div className={classes.divSeparate}>
-                  <div className={classes.first}>
-                    <button
-                      onClick={() => handleLikeAdd(post.Id)}
-                      disabled={disabled}
-                      type="button"
-                      className={classes.button}
-                    >
-                      <Like />
-                    </button>
-                    <button className={classes.number}>
-                      {post.likes.length}
-                    </button>
-                  </div>
-                  <div className={classes.second}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIdComment(post.Id);
-                        setPopUp(!popUp);
-                      }}
-                      className={classes.buttonComment}
-                    >
-                      Comment
-                    </button>
-                  </div>
-                </div>
-                {post?.comments &&
-                  post.comments.map((comment: any) => {
-                    return (
-                      <div className={classes.divDescription} key={comment.id}>
-                        <div className={classes.divSeparate}>
-                          <p className={classes.description}>{comment.name}</p>
-                          <p className={classes.description}>
-                            {getTime(new Date(comment.date))}
-                          </p>
-                        </div>
-                        <hr className={classes.hr} />
-                        <div className={classes.divCommentContent}>
-                          <p className={classes.description}>
-                            {comment.comment}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
+          <div className={classes.divButton}>
+            <button
+              type="button"
+              onClick={() => {
+                setEdit(!edit);
+              }}
+              className={classes.button}
+            >
+              <Pen />
+            </button>
+          </div>
+          {edit ? (
+            <FormPosts setEdit={setEdit} />
+          ) : (
+            <div className={classes.boxPosts}>
+              {popUp ? (
+                <PopUpComment idComment={idComment} setPopUp={setPopUp} />
+              ) : null}
+              <div className={classes.divSubtitle}>
+                <p className={classes.label}> Your Posts</p>
               </div>
-            );
-          })}
+              {posts?.map((post: any) => {
+                return (
+                  <div className={classes.eachPost} key={post.Id}>
+                    <div className={classes.divAuthor}>
+                      <p className={classes.name}>{post.name}</p>
+                      <button
+                        onClick={() => handleDeletePost(post.Id)}
+                        className={classes.button}
+                        type="button"
+                      >
+                        <CloseCircle />
+                      </button>
+                    </div>
+                    <div className={classes.divTitlePost}>
+                      <h3 className={styles.microTitles}>{post.title}</h3>
+                    </div>
+                    {post?.image ? (
+                      <img
+                        src={post.image}
+                        alt="post"
+                        className={classes.imagePost}
+                      />
+                    ) : null}
+                    <div className={classes.divDescription}>
+                      <p className={classes.description}>{post.description}</p>
+                    </div>
+                    <div className={classes.divSeparate}>
+                      <div className={classes.first}>
+                        <button
+                          onClick={() => handleLikeAdd(post.Id)}
+                          disabled={disabled}
+                          type="button"
+                          className={classes.button}
+                        >
+                          <Like />
+                        </button>
+                        <button className={classes.number}>
+                          {post.likes.length}
+                        </button>
+                      </div>
+                      <div className={classes.second}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIdComment(post.Id);
+                            setPopUp(!popUp);
+                          }}
+                          className={classes.buttonComment}
+                        >
+                          Comment
+                        </button>
+                      </div>
+                    </div>
+                    {post?.comments &&
+                      post.comments.map((comment: any) => {
+                        return (
+                          <div
+                            className={classes.divDescription}
+                            key={comment.id}
+                          >
+                            <div className={classes.divSeparate}>
+                              <p className={classes.description}>
+                                {comment.name}
+                              </p>
+                              <p className={classes.description}>
+                                {getTime(new Date(comment.date))}
+                              </p>
+                            </div>
+                            <hr className={classes.hr} />
+                            <div className={classes.divCommentContent}>
+                              <p className={classes.description}>
+                                {comment.comment}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      ) : null}
+    </Fragment>
   );
 }
 const useStyles = makeStyles({
@@ -242,7 +251,7 @@ const useStyles = makeStyles({
     width: "4rem",
     height: "3rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -264,8 +273,8 @@ const useStyles = makeStyles({
   },
   label: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
     fontSize: "5vh",
     margin: "0",
     fontWeight: 900,
@@ -288,7 +297,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     flexDirection: "column",
     width: "60%",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     border: `2px solid ${colors.Black}`,
     borderRadius: "5px",
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
@@ -315,9 +324,9 @@ const useStyles = makeStyles({
   },
   name: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "4vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "3vh",
     margin: "0",
     marginTop: "1rem",
     marginBottom: "1rem",
@@ -334,7 +343,7 @@ const useStyles = makeStyles({
   },
   titlePost: {
     display: "flex",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontWeight: "900",
     color: colors.Black,
     fontSize: "4vh",
@@ -379,7 +388,7 @@ const useStyles = makeStyles({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     textAlign: "left",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     color: colors.Black,
@@ -419,7 +428,7 @@ const useStyles = makeStyles({
     width: "4rem",
     height: "3rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -453,7 +462,7 @@ const useStyles = makeStyles({
     width: "15rem",
     height: "4rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

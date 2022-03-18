@@ -11,6 +11,20 @@ import toast from "react-hot-toast";
 import styles from "../Title/title.module.scss";
 import { CheckCircle } from "@styled-icons/boxicons-regular/CheckCircle";
 import { CloseCircleOutline } from "@styled-icons/evaicons-outline/CloseCircleOutline";
+import Reveal from "react-awesome-reveal";
+import { keyframes } from "@emotion/react";
+
+const customAnimation = keyframes`
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 export default function Friends(props: any): JSX.Element {
   const dispatch = useDispatch();
@@ -74,148 +88,158 @@ export default function Friends(props: any): JSX.Element {
     <Layout>
       <div className={classes.root}>
         <Title title={"Friends"} />
-        <div className={classes.container}>
-          {friends.length === 0 ? (
-            <div className={classes.divTitle}>
-              <p className={styles.miniTitle}>
-                You don't have any friends {currentUser.fullname}
-              </p>
-            </div>
-          ) : (
-            <Fragment>
+        <Reveal className={classes.reveal} keyframes={customAnimation}>
+          {friends && friends.length > 0 ? ( 
+          <div className={classes.container}>
+            {friends.length === 0 ? (
               <div className={classes.divTitle}>
                 <p className={styles.miniTitle}>
-                  These are all your friends {currentUser.fullname}
+                  You don't have any friends {currentUser.fullname}
                 </p>
               </div>
-              <div className={classes.divSub}>
-                <p className={classes.label}>Requests</p>
-              </div>
-              {booleanRequest && booleanRequest.length !== 0 ? (
-                <div className={classes.divFriends}>
-                  {booleanRequest &&
-                    booleanRequest.map((item: any, index: number) => {
-                      return (
-                        <div className={classes.divFriend} key={index}>
-                          {item.request ? (
-                            <Fragment>
-                              <div className={classes.divFriendPhoto}>
-                                {item.image ? (
-                                  <img
-                                    src={item.image}
-                                    alt=""
-                                    className={classes.profilePhoto}
-                                  />
-                                ) : (
-                                  <p className={classes.textNone}>No photo</p>
-                                )}
-                              </div>
-                              <div className={classes.divFriendName}>
-                                <a
-                                  target="_blank"
-                                  className={classes.eachLink}
-                                  rel="noreferrer"
-                                  href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frienduuid}`}
-                                >
-                                  <p className={classes.textName}>
-                                    {item.namefriend}
-                                  </p>
-                                </a>
-                                <p className={classes.textNone}>
-                                  {item.emailfriend}
-                                </p>
-                              </div>
-                              <div className={classes.divButtons}>
-                                <button
-                                  className={classes.buttons}
-                                  onClick={() => handleAcceptFriend(item.uuid)}
-                                  type="button"
-                                >
-                                  <CheckCircle className={classes.icons} />
-                                </button>
-                                <button
-                                  className={classes.buttons}
-                                  onClick={() => handleRemoveFriend(item.uuid)}
-                                  type="button"
-                                >
-                                  <CloseCircleOutline
-                                    className={classes.icons}
-                                  />
-                                </button>
-                              </div>
-                            </Fragment>
-                          ) : null}
-                        </div>
-                      );
-                    })}
+            ) : (
+              <Fragment>
+                <div className={classes.divTitle}>
+                  <p className={styles.miniTitle}>
+                    These are all your friends {currentUser.fullname}
+                  </p>
                 </div>
-              ) : (
                 <div className={classes.divSub}>
-                  <p className={classes.textNone}>No requests</p>
+                  <p className={classes.label}>Requests</p>
                 </div>
-              )}
-              <div className={classes.divSub}>
-                <p className={classes.label}>Friends</p>
-              </div>
-              {booleanFriends && booleanFriends.length !== 0 ? (
-                <div className={classes.divFriends}>
-                  {booleanFriends &&
-                    booleanFriends.map((item: any, index: number) => {
-                      return (
-                        <div className={classes.divFriend} key={index}>
-                          {!item.request ? (
-                            <Fragment>
-                              <div className={classes.divFriendPhoto}>
-                                {item.image ? (
-                                  <img
-                                    src={item.image}
-                                    alt=""
-                                    className={classes.profilePhoto}
-                                  />
-                                ) : (
-                                  <p className={classes.textNone}>No photo</p>
-                                )}
-                              </div>
-                              <div className={classes.divFriendName}>
-                                <a
-                                  target="_blank"
-                                  className={classes.eachLink}
-                                  rel="noreferrer"
-                                  href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frieduuid}`}
-                                >
-                                  <p className={classes.textName}>
-                                    {item.namefriend}
+                {booleanRequest && booleanRequest.length !== 0 ? (
+                  <div className={classes.divFriends}>
+                    {booleanRequest &&
+                      booleanRequest.map((item: any, index: number) => {
+                        return (
+                          <div className={classes.divFriend} key={index}>
+                            {item.request ? (
+                              <Fragment>
+                                <div className={classes.divFriendPhoto}>
+                                  {item.image ? (
+                                    <img
+                                      src={item.image}
+                                      alt=""
+                                      className={classes.profilePhoto}
+                                    />
+                                  ) : (
+                                    <p className={classes.textNone}>No photo</p>
+                                  )}
+                                </div>
+                                <div className={classes.divFriendName}>
+                                  <a
+                                    target="_blank"
+                                    className={classes.eachLink}
+                                    rel="noreferrer"
+                                    href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frienduuid}`}
+                                  >
+                                    <p className={classes.textName}>
+                                      {item.namefriend}
+                                    </p>
+                                  </a>
+                                  <p className={classes.textNone}>
+                                    {item.emailfriend}
                                   </p>
-                                </a>
-                                <p className={classes.textNone}>
-                                  {item.emailfriend}
-                                </p>
-                              </div>
-                              <div className={classes.divFriendName}>
-                                <button
-                                  className={classes.buttons}
-                                  onClick={() => handleRemoveFriend(item.uuid)}
-                                  type="button"
-                                >
-                                  <CloseCircleOutline
-                                    className={classes.icons}
-                                  />
-                                </button>
-                              </div>
-                            </Fragment>
-                          ) : null}
-                        </div>
-                      );
-                    })}
-                </div>
-              ) : (
+                                </div>
+                                <div className={classes.divButtons}>
+                                  <button
+                                    className={classes.buttons}
+                                    onClick={() =>
+                                      handleAcceptFriend(item.uuid)
+                                    }
+                                    type="button"
+                                  >
+                                    <CheckCircle className={classes.icons} />
+                                  </button>
+                                  <button
+                                    className={classes.buttons}
+                                    onClick={() =>
+                                      handleRemoveFriend(item.uuid)
+                                    }
+                                    type="button"
+                                  >
+                                    <CloseCircleOutline
+                                      className={classes.icons}
+                                    />
+                                  </button>
+                                </div>
+                              </Fragment>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                  </div>
+                ) : (
+                  <div className={classes.divSub}>
+                    <p className={classes.textNone}>No requests</p>
+                  </div>
+                )}
                 <div className={classes.divSub}>
-                  <p className={classes.textNone}>No Friends</p>
+                  <p className={classes.label}>Friends</p>
                 </div>
-              )}
-            </Fragment>
-          )}
-        </div>
+                {booleanFriends && booleanFriends.length !== 0 ? (
+                  <div className={classes.divFriends}>
+                    {booleanFriends &&
+                      booleanFriends.map((item: any, index: number) => {
+                        return (
+                          <div className={classes.divFriend} key={index}>
+                            {!item.request ? (
+                              <Fragment>
+                                <div className={classes.divFriendPhoto}>
+                                  {item.image ? (
+                                    <img
+                                      src={item.image}
+                                      alt=""
+                                      className={classes.profilePhoto}
+                                    />
+                                  ) : (
+                                    <p className={classes.textNone}>No photo</p>
+                                  )}
+                                </div>
+                                <div className={classes.divFriendName}>
+                                  <a
+                                    target="_blank"
+                                    className={classes.eachLink}
+                                    rel="noreferrer"
+                                    href={`https://coolormedia.netlify.app/profileOut?uuid=${item.frieduuid}`}
+                                  >
+                                    <p className={classes.textName}>
+                                      {item.namefriend}
+                                    </p>
+                                  </a>
+                                  <p className={classes.textNone}>
+                                    {item.emailfriend}
+                                  </p>
+                                </div>
+                                <div className={classes.divFriendName}>
+                                  <button
+                                    className={classes.buttons}
+                                    onClick={() =>
+                                      handleRemoveFriend(item.uuid)
+                                    }
+                                    type="button"
+                                  >
+                                    <CloseCircleOutline
+                                      className={classes.icons}
+                                    />
+                                  </button>
+                                </div>
+                              </Fragment>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                  </div>
+                ) : (
+                  <div className={classes.divSub}>
+                    <p className={classes.textNone}>No Friends</p>
+                  </div>
+                )}
+              </Fragment>
+            )}
+          </div>
+           ): null}
+        </Reveal>
       </div>
     </Layout>
   );
@@ -231,6 +255,16 @@ const useStyles = makeStyles({
     height: "fit-content",
     width: "100%",
     minHeight: "100vh",
+    "@media (max-width: 1280px)": {
+      paddingTop: "2rem",
+    }
+  },
+  reveal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
   },
   eachLink: {
     display: "flex",
@@ -245,10 +279,10 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
     flexDirection: "column",
-    marginTop: "5rem",
-    marginBottom: "5rem",
+    marginTop: "3rem",
+    marginBottom: "3rem",
     width: "60%",
-    backgroundColor: `${colors.Purple}`,
+    backgroundColor: `${colors.Blue}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     transition: "5s",
@@ -270,7 +304,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     marginTop: "3rem",
     marginBottom: "3rem",
-    width: "80%",
+    width: "95%",
     "@media (max-width: 1280px)": {
       width: "90%",
     },
@@ -287,14 +321,14 @@ const useStyles = makeStyles({
   },
   label: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "4vh",
     margin: "0",
     marginBottom: "1rem",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
-      fontSize: "4vh",
+      fontSize: "3vh",
     },
   },
   divFriends: {
@@ -319,13 +353,13 @@ const useStyles = makeStyles({
     width: "100%",
     height: "fit-content",
     padding: "1rem",
-    backgroundColor: `${colors.Blue}`,
+    backgroundColor: `${colors.Pink}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     marginBottom: "2rem",
     "@media (max-width: 1280px)": {
       width: "90%",
-      flexDirection: "column"
+      flexDirection: "column",
     },
   },
   divFriendPhoto: {
@@ -354,20 +388,20 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "3vh",
     fontWeight: 900,
-    margin: '0',
+    margin: "0",
     color: colors.Black,
   },
   textName: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "3vh",
     fontWeight: 900,
-    margin: '0',
+    margin: "0",
     marginBottom: "2rem",
     color: colors.Black,
     transitionDuration: "1s",
@@ -422,7 +456,7 @@ const useStyles = makeStyles({
     width: "5rem",
     height: "4rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

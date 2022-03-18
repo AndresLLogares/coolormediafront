@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { makeStyles } from "@mui/styles";
 import useWindowSize from "../../utils/size";
 import { colors } from "../../utils/colors";
-import { GETALLUSERS, LOGOUTUSER } from "../../redux/actions";
+import { GETALLUSERS, LOGOUTUSER, GETFRIENDS } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { CloseCircle } from "@styled-icons/ionicons-sharp/CloseCircle";
 import { Menu } from "@styled-icons/open-iconic/Menu";
@@ -15,7 +15,9 @@ export default function Navbar(): JSX.Element {
 
   const classes = useStyles();
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
+
+  const [fix, setFix] = useState(false);
 
   const [auto, setAuto] = useState([]);
 
@@ -24,6 +26,11 @@ export default function Navbar(): JSX.Element {
   const { width } = useWindowSize();
 
   const allUsers: any = useSelector((state) => state);
+
+  let friends = allUsers?.coolor?.friends?.friend || [];
+
+  let booleanRequest =
+    friends && friends.filter((item: any) => item.request === true);
 
   let emailUser = localStorage.getItem("Email") || "";
 
@@ -52,10 +59,18 @@ export default function Navbar(): JSX.Element {
     );
   };
 
+  const handleFix = async () => {
+    setFix(true);
+    setShow(true);
+  };
+
   useEffect(() => {
     const getAllUsers = async () => {
       await dispatch(GETALLUSERS());
+      await dispatch(GETFRIENDS(emailUser));
     };
+    setShow(false);
+    setFix(false);
     getAllUsers();
   }, [dispatch]);
   return (
@@ -64,10 +79,10 @@ export default function Navbar(): JSX.Element {
         <div className={classes.divFixedButton}>
           <button
             type="button"
-            onClick={() => setShow(true)}
+            onClick={handleFix}
             className={classes.buttonFixed}
           >
-            <CloseCircle size={30} />
+            <Menu size={30} />
           </button>
         </div>
       ) : (
@@ -77,71 +92,79 @@ export default function Navbar(): JSX.Element {
             onClick={() => setShow(false)}
             className={classes.buttonFixed}
           >
-            <Menu size={30} />
+            <CloseCircle size={30} />
           </button>
         </div>
       )}
-      <div className={show ? classes.none : classes.sideBar}>
-        <div className={classes.divLogo}>
-          <h1 className={styles.miniTitle}>CoolorMedia</h1>
-        </div>
-        <div className={classes.divSearch}>
-          <input
-            type="text"
-            name="friends"
-            onChange={handleInputChange}
-            className={classes.input}
-            value={userSearch}
-            placeholder="Search for friends"
-          />
-          {auto.length === 0 ? null : (
-            <Fragment>
-              {auto &&
-                auto.slice(0, 5).map((item: any, index: number) => (
-                  <a
-                    key={index}
-                    className={classes.divAuto}
-                    style={{ textDecoration: "none" }}
-                    target="_blank"
-                    rel="noreferrer"
-                    href={`https://coolormedia.netlify.app/profileOut?uuid=${item.uuid}`}
-                  >
-                    <p className={classes.auto}>{item.full_name}</p>
-                  </a>
-                ))}
-            </Fragment>
-          )}
-          <div className={classes.containerLinks}>
-            <Link className={classes.links} to="/Home">
-              <button className={classes.button}>Home</button>
-            </Link>
-            <Link className={classes.links} to="/aboutMe">
-              <button className={classes.button}>About Me</button>
-            </Link>
-            <Link className={classes.links} to="/Profile">
-              <button className={classes.button}>Your Profile</button>
-            </Link>
-            <Link className={classes.links} to="/messages">
-              <button className={classes.button}>Messages</button>
-            </Link>
-            <Link className={classes.links} to="/Friends">
-              <button className={classes.button}>Friends</button>
-            </Link>
-            <Link className={classes.links} to="/news">
-              <button className={classes.button}>News</button>
-            </Link>
-            <div className={classes.links}>
-              <button
-                type="button"
-                onClick={handleLogOut}
-                className={classes.button}
-              >
-                Logout
-              </button>
+      {fix ? (
+        <div className={show ? classes.sideBar : classes.none}>
+          <div className={classes.divLogo}>
+            <h1 className={styles.miniTitle}>CoolorMedia</h1>
+          </div>
+          <div className={classes.divSearch}>
+            <input
+              type="text"
+              name="friends"
+              onChange={handleInputChange}
+              className={classes.input}
+              value={userSearch}
+              placeholder="Search for friends"
+            />
+            {auto.length === 0 ? null : (
+              <Fragment>
+                {auto &&
+                  auto.slice(0, 5).map((item: any, index: number) => (
+                    <a
+                      key={index}
+                      className={classes.divAuto}
+                      style={{ textDecoration: "none" }}
+                      target="_blank"
+                      rel="noreferrer"
+                      href={`https://coolormedia.netlify.app/profileOut?uuid=${item.uuid}`}
+                    >
+                      <p className={classes.auto}>{item.full_name}</p>
+                    </a>
+                  ))}
+              </Fragment>
+            )}
+            <div className={classes.containerLinks}>
+              <Link className={classes.links} to="/Home">
+                <button className={classes.button}>Home</button>
+              </Link>
+              <Link className={classes.links} to="/aboutMe">
+                <button className={classes.button}>About Me</button>
+              </Link>
+              <Link className={classes.links} to="/Profile">
+                <button className={classes.button}>Your Profile</button>
+              </Link>
+              <Link className={classes.links} to="/messages">
+                <button className={classes.button}>Messages</button>
+              </Link>
+              {booleanRequest && booleanRequest.length === 0 ? (
+                <Link className={classes.links} to="/Friends">
+                  <button className={classes.button}>Friends</button>
+                </Link>
+              ) : (
+                <Link className={classes.links} to="/Friends">
+                  <button className={classes.button}>New request!!</button>
+                </Link>
+              )}
+              <Link className={classes.links} to="/news">
+                <button className={classes.button}>News</button>
+              </Link>
+              <div className={classes.links}>
+                <button
+                  type="button"
+                  onClick={handleLogOut}
+                  className={classes.button}
+                >
+                  Logout
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </Fragment>
   );
 }
@@ -162,7 +185,7 @@ const useStyles = makeStyles({
     width: "4rem",
     height: "3rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -189,7 +212,7 @@ const useStyles = makeStyles({
     width: "20rem",
     height: "100%",
     flexDirection: "column",
-    backgroundColor: `${colors.Blue}`,
+    backgroundColor: `${colors.Pink}`,
     alignItems: "flex-start",
     borderRight: `solid 0.5rem ${colors.Black}`,
     justifyContent: "flex-start",
@@ -210,7 +233,7 @@ const useStyles = makeStyles({
     width: "20rem",
     height: "100%",
     flexDirection: "column",
-    backgroundColor: `${colors.Blue}`,
+    backgroundColor: `${colors.Pink}`,
     alignItems: "flex-start",
     borderRight: `solid 0.5rem ${colors.Black}`,
     justifyContent: "flex-start",
@@ -241,7 +264,7 @@ const useStyles = makeStyles({
   },
   input: {
     width: "80%",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     padding: "1rem",
@@ -264,20 +287,20 @@ const useStyles = makeStyles({
     width: "80%",
     height: "fit-content",
     textDecoration: "none",
-    top: "12rem",
+    top: "14rem",
     padding: "0.5rem",
     borderRadius: "5px",
     border: `0.2rem solid ${colors.Black}`,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     zIndex: 10,
     "&:hover": {
-      backgroundColor: `${colors.Turquoise}`,
+      backgroundColor: `${colors.Blue}`,
     },
   },
   auto: {
     color: `${colors.Black}`,
     textDecoration: "none",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
   },
@@ -305,7 +328,7 @@ const useStyles = makeStyles({
     width: "100%",
     height: "4rem",
     backgroundColor: `${colors.Black}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -318,7 +341,7 @@ const useStyles = makeStyles({
     marginTop: "1rem",
     "&:hover": {
       cursor: "pointer",
-      backgroundColor: `${colors.Yellow}`,
+      backgroundColor: `${colors.White}`,
       color: colors.Black,
       borderBottom: `0.2rem solid ${colors.Black}`,
     },

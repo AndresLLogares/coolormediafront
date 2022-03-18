@@ -73,7 +73,7 @@ export default function FormJobs(props: any): JSX.Element {
       left="25%"
       width="50%"
       height="fit-content"
-      backgroundColor={colors.Pink}
+      backgroundColor={colors.Blue}
       topMobile="20%"
       leftMobile="0%"
       widthMobile="90%"
@@ -136,7 +136,7 @@ const useStyles = makeStyles({
     width: "4rem",
     height: "3rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -179,8 +179,8 @@ const useStyles = makeStyles({
     width: "70%",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
     fontSize: "3vh",
     fontWeight: 900,
     "@media (max-width: 1280px)": {
@@ -189,7 +189,7 @@ const useStyles = makeStyles({
   },
   textarea: {
     width: "80%",
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     fontSize: "2vh",
     fontWeight: "bold",
     padding: "1rem",
@@ -213,7 +213,7 @@ const useStyles = makeStyles({
     width: "20rem",
     height: "5rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",

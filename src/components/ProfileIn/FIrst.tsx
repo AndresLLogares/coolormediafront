@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { makeStyles } from "@mui/styles";
 import { colors } from "../../utils/colors";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,77 +97,83 @@ export default function First(): JSX.Element {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        <div className={classes.boxBackground}>
-          {user?.coolor?.user?.backPhoto ? (
-            <img
-              src={user?.coolor?.user?.backPhoto}
-              alt=""
-              className={classes.backImage}
-            />
-          ) : (
-            <p className={classes.textNone}>Select a Photo</p>
-          )}
-        </div>
-        <div className={classes.sortButton}>
-          <button
-            onClick={handleInputFile}
-            type="button"
-            className={classes.button}
-          >
-            <Pen />
-          </button>
-          <input
-            onChange={HandleImage}
-            type="file"
-            style={{ display: "none" }}
-            id="file"
-            name="file"
-          />
-        </div>
-      </div>
-      <div className={classes.container}>
-        <div className={classes.separateColumns}>
-          <div className={classes.firstColumn}>
-            <div className={classes.boxProfilePhoto}>
-              {user?.coolor?.user?.profilePhoto ? (
+    <Fragment>
+      {user?.coolor?.user?.backPhoto ? (
+        <div className={classes.root}>
+          <div className={classes.container}>
+            <div className={classes.boxBackground}>
+              {user?.coolor?.user?.backPhoto ? (
                 <img
-                  src={user?.coolor?.user?.profilePhoto}
+                  src={user?.coolor?.user?.backPhoto}
                   alt=""
-                  className={classes.profilePhoto}
+                  className={classes.backImage}
                 />
               ) : (
                 <p className={classes.textNone}>Select a Photo</p>
               )}
             </div>
-            <button
-              onClick={handleInputFileProfile}
-              type="button"
-              className={classes.button}
-            >
-              <Pen />
-            </button>
-            <input
-              onChange={HandleImageProfile}
-              type="file"
-              style={{ display: "none" }}
-              id="fileProfile"
-              name="fileProfile"
-            />
-            <div className={classes.boxInformation}>
-              <p className={classes.information}>
-                {user?.coolor?.user?.fullname}
-              </p>
-              <p className={classes.information}>{user?.coolor?.user?.email}</p>
+            <div className={classes.sortButton}>
+              <button
+                onClick={handleInputFile}
+                type="button"
+                className={classes.button}
+              >
+                <Pen />
+              </button>
+              <input
+                onChange={HandleImage}
+                type="file"
+                style={{ display: "none" }}
+                id="file"
+                name="file"
+              />
             </div>
           </div>
-          <div className={classes.secondColumn}>
-            <Technologies />
+          <div className={classes.container}>
+            <div className={classes.separateColumns}>
+              <div className={classes.firstColumn}>
+                <div className={classes.boxProfilePhoto}>
+                  {user?.coolor?.user?.profilePhoto ? (
+                    <img
+                      src={user?.coolor?.user?.profilePhoto}
+                      alt=""
+                      className={classes.profilePhoto}
+                    />
+                  ) : (
+                    <p className={classes.textNone}>Select a Photo</p>
+                  )}
+                </div>
+                <button
+                  onClick={handleInputFileProfile}
+                  type="button"
+                  className={classes.button}
+                >
+                  <Pen />
+                </button>
+                <input
+                  onChange={HandleImageProfile}
+                  type="file"
+                  style={{ display: "none" }}
+                  id="fileProfile"
+                  name="fileProfile"
+                />
+                <div className={classes.boxInformation}>
+                  <p className={classes.information}>
+                    {user?.coolor?.user?.fullname}
+                  </p>
+                  <p className={classes.information}>
+                    {user?.coolor?.user?.email}
+                  </p>
+                </div>
+              </div>
+              <div className={classes.secondColumn}>
+                <Technologies />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : null}
+    </Fragment>
   );
 }
 
@@ -177,7 +183,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    paddingTop: "5rem",
+    paddingTop: "3rem",
     width: "100%",
   },
   container: {
@@ -221,8 +227,8 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    fontSize: "5vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    fontSize: "4vh",
     fontWeight: 900,
     color: colors.Black,
     "@media (max-width: 1280px)": {
@@ -243,7 +249,7 @@ const useStyles = makeStyles({
     height: "3rem",
     marginTop: "2rem",
     backgroundColor: `${colors.Yellow}`,
-    fontFamily: ["Trispace", "sans-serif"].join(","),
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
     textTransform: "uppercase",
     fontWeight: 900,
     fontSize: "3vh",
@@ -272,7 +278,7 @@ const useStyles = makeStyles({
     "@media (max-width: 1280px)": {
       width: "100%",
       flexDirection: "column",
-      alignItems: "center", 
+      alignItems: "center",
       justifyContent: "center",
     },
   },
@@ -301,7 +307,6 @@ const useStyles = makeStyles({
     "@media (max-width: 1280px)": {
       width: "80%",
       height: "auto",
-      
     },
   },
   profilePhoto: {
@@ -322,7 +327,7 @@ const useStyles = makeStyles({
     marginBottom: "1rem",
     padding: "1rem",
     flexDirection: "column",
-    backgroundColor: colors.Purple,
+    backgroundColor: colors.Blue,
     boxShadow: "10px 10px 0 rgba(0, 0, 0, 1)",
     borderRadius: "5px",
     "@media (max-width: 1280px)": {
@@ -331,9 +336,9 @@ const useStyles = makeStyles({
   },
   information: {
     display: "flex",
-    fontFamily: ["Dekko", "sans-serif"].join(","),
-    color: colors.White,
-    fontSize: "3vh",
+    fontFamily: ["Noto Sans", "sans-serif"].join(","),
+    color: colors.Black,
+    fontSize: "2vh",
     margin: "0",
     fontWeight: 900,
     "@media (max-width: 1280px)": {

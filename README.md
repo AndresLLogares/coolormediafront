@@ -7,7 +7,7 @@ Este es un proyecto antiguo que decide hacerle algunas reformas para que se vea 
 - ![React](https://img.shields.io/badge/-React.js-blue)  
 - ![Typescript](https://img.shields.io/badge/-Javascript-yellow)
 - ![Node](https://img.shields.io/badge/-Node-green)
-- ![Material UI](https://img.shields.io/badge/-Material UI-red)
+- ![MaterialUI](https://img.shields.io/badge/-MaterialUI-red)
 - ![Redux](https://img.shields.io/badge/-Redux.js-blue)  
 
 ## Puedes ver la pagina aquí:
@@ -24,7 +24,7 @@ This is an old project that decided to make some reforms to make it look nicer, 
 - ![Javascript](https://img.shields.io/badge/-Javascript-yellow)
 - ![Node](https://img.shields.io/badge/-Node-green)
 - ![CSS](https://img.shields.io/badge/-SCSS-yellowgreen)
-- ![Material UI](https://img.shields.io/badge/-Material UI-red)
+- ![MaterialUI](https://img.shields.io/badge/-MaterialUI-red)
 - ![Redux](https://img.shields.io/badge/-Redux.js-blue)  
 
 ## You can see the website here:

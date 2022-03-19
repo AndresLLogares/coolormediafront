@@ -4,7 +4,7 @@ Este es un proyecto antiguo que decide hacerle algunas reformas para que se vea 
 
 ## Tecnologías: 
 
-- ![React](https://img.shields.io/badge/-Redux.js-blue)  
+- ![React](https://img.shields.io/badge/-React.js-blue)  
 - ![Typescript](https://img.shields.io/badge/-Javascript-yellow)
 - ![Node](https://img.shields.io/badge/-Node-green)
 - ![Material UI](https://img.shields.io/badge/-Express-blue)
@@ -20,7 +20,7 @@ This is an old project that decided to make some reforms to make it look nicer, 
 
 ## Technologies: 
 
-- ![React](https://img.shields.io/badge/-Next.js-blue)  
+- ![React](https://img.shields.io/badge/-React.js-blue)  
 - ![Javascript](https://img.shields.io/badge/-Javascript-yellow)
 - ![Node](https://img.shields.io/badge/-Node-green)
 - ![CSS](https://img.shields.io/badge/-SCSS-yellowgreen)
